@@ -16,6 +16,8 @@ const StyledButton = styled.button`
   font-size: ${theme.fontSize.l};
   box-shadow: 0 4px 10px 1px rgba(6, 22, 88, 0.28);
   font-weight: bold;
+  cursor: pointer;
+  outline: none;
 `;
 
 const Button = ({ children, primaryColor }) => {
