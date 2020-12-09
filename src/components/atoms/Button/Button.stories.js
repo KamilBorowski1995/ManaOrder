@@ -11,13 +11,12 @@ const Template = (args) => <Button {...args} />;
 
 export const Primary = Template.bind({});
 Primary.args = {
-  primary: true,
+  primaryColor: true,
   children: "Wypróbuj za darmo",
 };
 
 export const Small = Template.bind({});
 Small.args = {
-  wide: true,
-  primary: true,
+  primaryColor: true,
   children: "Zaloguj",
 };

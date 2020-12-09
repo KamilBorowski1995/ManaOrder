@@ -4,14 +4,13 @@ import styled from "styled-components";
 import { theme } from "../../../theme/mainTheme";
 
 const StyledButton = styled.button`
-  padding: 15px 20px;
-  width: ${({ wide }) => wide && "215px"};
-  height: ${({ wide }) => wide && "50px"};
+  width: 215px;
+  height: 50px;
   font-family: ${theme.primaryFont};
-  background-color: ${({ primary }) =>
-    primary ? theme.colors.primary : theme.colors.tertiary};
-  color: ${({ primary }) =>
-    primary ? theme.colors.tertiary : theme.colors.primary};
+  background-color: ${({ primaryColor }) =>
+    primaryColor ? theme.colors.primary : theme.colors.tertiary};
+  color: ${({ primaryColor }) =>
+    primaryColor ? theme.colors.tertiary : theme.colors.primary};
   border: none;
   border-radius: 24px;
   font-size: ${theme.fontSize.l};
@@ -19,12 +18,8 @@ const StyledButton = styled.button`
   font-weight: bold;
 `;
 
-const Button = ({ children, primary, wide }) => {
-  return (
-    <StyledButton primary={primary} wide={wide}>
-      {children}
-    </StyledButton>
-  );
+const Button = ({ children, primaryColor }) => {
+  return <StyledButton primaryColor={primaryColor}>{children}</StyledButton>;
 };
 
 export default Button;
