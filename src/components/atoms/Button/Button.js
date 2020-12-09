@@ -20,8 +20,12 @@ const StyledButton = styled.button`
   outline: none;
 `;
 
-const Button = ({ children, primaryColor }) => {
-  return <StyledButton primaryColor={primaryColor}>{children}</StyledButton>;
+const Button = ({ children, primaryColor, onClick }) => {
+  return (
+    <StyledButton onClick={onClick} primaryColor={primaryColor}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default Button;

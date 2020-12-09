@@ -1,5 +1,6 @@
 import "./App.css";
 import styled from "styled-components";
+import { BrowserRouter, Route } from "react-router-dom";
 
 import { theme } from "./theme/mainTheme";
 
@@ -13,9 +14,11 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    <Wrapper>
-      <HomePage />
-    </Wrapper>
+    <BrowserRouter>
+      <Wrapper>
+        <Route exact path="/" component={HomePage} />
+      </Wrapper>
+    </BrowserRouter>
   );
 }
 
