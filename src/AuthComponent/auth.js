@@ -11,7 +11,7 @@ class Auth {
 
   logout(cb) {
     this.authenticated = false;
-    sessionStorage.setItem("auth", false);
+    sessionStorage.clear("auth");
     cb();
   }
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { Link, useHistory } from "react-router-dom";
 
@@ -6,6 +6,8 @@ import Logo from "../../assets/svg/Logo.svg";
 import Button from "../../atoms/Button/Button";
 
 import { theme } from "../../../theme/mainTheme";
+
+import auth from "../../../AuthComponent/auth";
 
 const NavBarWrapper = styled.div`
   display: grid;
@@ -32,22 +34,38 @@ const StyledLogo = styled(Link)`
 `;
 
 const NavBar = () => {
+  const [userIsLogged, setUserIsLogged] = useState(false);
+
   const history = useHistory();
 
-  const handleClick = () => {
-    history.push("/login");
+  const handleClickButton = (e) => {
+    if (userIsLogged) {
+      auth.logout(() => history.push("/"));
+    } else {
+      history.push("/login");
+    }
   };
+
+  const handleClickLogo = (e) => {
+    history.push("/");
+  };
+
+  useEffect(() => {
+    setUserIsLogged(auth.isAuthenticated());
+  }, [auth.isAuthenticated()]);
 
   return (
     <NavBarWrapper>
       <StyledLogo to="/">
-        <img onClick={handleClick} src={Logo} alt="logo ManaOrder" />
+        <img onClick={handleClickLogo} src={Logo} alt="logo ManaOrder" />
       </StyledLogo>
 
       <NavWrapper>
         <StyledLink to="/">FAQ</StyledLink>
         <StyledLink to="/">Kontakt</StyledLink>
-        <Button onClick={handleClick}>Zaloguj się</Button>{" "}
+        <Button onClick={handleClickButton}>
+          {userIsLogged ? "Wyloguj" : "Zaloguj się"}
+        </Button>{" "}
       </NavWrapper>
     </NavBarWrapper>
   );
