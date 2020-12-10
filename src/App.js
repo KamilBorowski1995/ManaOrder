@@ -1,11 +1,13 @@
-import "./App.css";
+import React from "react";
 import styled from "styled-components";
 import { BrowserRouter, Route } from "react-router-dom";
 
 import { theme } from "./theme/mainTheme";
 
-import HomePage from "./pages/HomePage";
+import AppPage from "./pages/AppPage/AppPage";
 import LoginPage from "./pages/LoginPage";
+
+import ProtectedRoute from "./AuthComponent/protected.route";
 
 const Wrapper = styled.div`
   width: 100vw;
@@ -17,7 +19,7 @@ function App() {
   return (
     <BrowserRouter>
       <Wrapper>
-        <Route exact path="/" component={HomePage} />
+        <ProtectedRoute exact path="/" component={AppPage} />
         <Route exact path="/login" component={LoginPage} />
       </Wrapper>
     </BrowserRouter>

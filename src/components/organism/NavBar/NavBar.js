@@ -9,11 +9,11 @@ import { theme } from "../../../theme/mainTheme";
 
 const NavBarWrapper = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr 1fr;
+  grid-template-columns: 4fr 1fr;
 `;
 const NavWrapper = styled.nav`
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   align-items: center;
 `;
 
@@ -21,7 +21,7 @@ const StyledLink = styled(Link)`
   color: ${theme.colors.primary};
   text-decoration: none;
   transition: 0.3s ease-in-out;
-
+  padding-right: 50px;
   :hover {
     opacity: 0.8;
   }
@@ -47,8 +47,8 @@ const NavBar = () => {
       <NavWrapper>
         <StyledLink to="/">FAQ</StyledLink>
         <StyledLink to="/">Kontakt</StyledLink>
+        <Button onClick={handleClick}>Zaloguj się</Button>{" "}
       </NavWrapper>
-      <Button onClick={handleClick}>Zaloguj się</Button>
     </NavBarWrapper>
   );
 };
