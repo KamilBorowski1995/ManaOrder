@@ -1,11 +1,11 @@
 import React from "react";
-import MainTemplate from "../../templates/MainTemplate";
+import AppTemplate from "../../templates/AppTemplate";
 
 const AppPage = () => {
   return (
-    <MainTemplate>
+    <AppTemplate>
       <p>App Page</p>
-    </MainTemplate>
+    </AppTemplate>
   );
 };
 

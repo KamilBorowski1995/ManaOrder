@@ -20,3 +20,9 @@ Small.args = {
   primaryColor: true,
   children: "Zaloguj",
 };
+export const Logout = Template.bind({});
+Logout.args = {
+  primaryColor: true,
+  logout: true,
+  children: "wyloguj",
+};

@@ -15,7 +15,7 @@ const NavBarWrapper = styled.div`
 `;
 const NavWrapper = styled.nav`
   display: flex;
-  /* justify-content: space-evenly; */
+  /* justify-content: space-between; */
   align-items: center;
 `;
 
@@ -63,9 +63,9 @@ const NavBar = () => {
       <NavWrapper>
         <StyledLink to="/">FAQ</StyledLink>
         <StyledLink to="/">Kontakt</StyledLink>
-        <Button onClick={handleClickButton}>
+        <Button logout={userIsLogged} onClick={handleClickButton}>
           {userIsLogged ? "Wyloguj" : "Zaloguj się"}
-        </Button>{" "}
+        </Button>
       </NavWrapper>
     </NavBarWrapper>
   );

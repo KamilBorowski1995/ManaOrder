@@ -5,6 +5,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import { theme } from "./theme/mainTheme";
 
 import AppPage from "./pages/AppPage/AppPage";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 
 import ProtectedRoute from "./AuthComponent/protected.route";
@@ -19,7 +20,12 @@ function App() {
   return (
     <BrowserRouter>
       <Wrapper>
-        <ProtectedRoute exact path="/" component={AppPage} />
+        <ProtectedRoute
+          exact
+          path="/"
+          component={AppPage}
+          redirect={HomePage}
+        />
         <Route exact path="/login" component={LoginPage} />
       </Wrapper>
     </BrowserRouter>

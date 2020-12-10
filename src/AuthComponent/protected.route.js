@@ -1,9 +1,12 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import auth from "./auth";
-import HomePage from "../pages/HomePage";
 
-const ProtectedRoute = ({ component: Component, ...rest }) => {
+const ProtectedRoute = ({
+  component: Component,
+  redirect: Redirect,
+  ...rest
+}) => {
   return (
     <Route
       {...rest}
@@ -11,7 +14,7 @@ const ProtectedRoute = ({ component: Component, ...rest }) => {
         if (auth.isAuthenticated()) {
           return <Component {...props} />;
         } else {
-          return <HomePage {...props} />;
+          return <Redirect {...props} />;
         }
       }}
     />
