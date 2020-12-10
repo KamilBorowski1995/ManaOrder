@@ -1,19 +1,33 @@
 import React from "react";
 import styled from "styled-components";
+import { Link, useHistory } from "react-router-dom";
 
 import Logo from "../../assets/svg/Logo.svg";
 import Button from "../../atoms/Button/Button";
 
-import { Link, useHistory } from "react-router-dom";
+import { theme } from "../../../theme/mainTheme";
 
 const NavBarWrapper = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 4fr 1fr 1fr;
 `;
-const Nav = styled.div`
-  flex-basis: 35%;
+const NavWrapper = styled.nav`
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
+  align-items: center;
+`;
+
+const StyledLink = styled(Link)`
+  color: ${theme.colors.primary};
+  text-decoration: none;
+  transition: 0.3s ease-in-out;
+
+  :hover {
+    opacity: 0.8;
+  }
+`;
+const StyledLogo = styled(Link)`
+  display: flex;
   align-items: center;
 `;
 
@@ -21,18 +35,20 @@ const NavBar = () => {
   const history = useHistory();
 
   const handleClick = () => {
-    console.log("klikam");
     history.push("/login");
   };
 
   return (
     <NavBarWrapper>
-      <img src={Logo} alt="logo ManaOrder" />
-      <Nav>
-        <Link to="/">FAQ</Link>
-        <Link to="/">Kontakt</Link>
-        <Button onClick={handleClick}>Zaloguj się</Button>
-      </Nav>
+      <StyledLogo to="/">
+        <img onClick={handleClick} src={Logo} alt="logo ManaOrder" />
+      </StyledLogo>
+
+      <NavWrapper>
+        <StyledLink to="/">FAQ</StyledLink>
+        <StyledLink to="/">Kontakt</StyledLink>
+      </NavWrapper>
+      <Button onClick={handleClick}>Zaloguj się</Button>
     </NavBarWrapper>
   );
 };
