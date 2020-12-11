@@ -27,6 +27,7 @@ function App() {
           redirect={HomePage}
         />
         <Route exact path="/login" component={LoginPage} />
+        <Route exact path="/orders" component={AppPage} />
       </Wrapper>
     </BrowserRouter>
   );

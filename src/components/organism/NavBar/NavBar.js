@@ -12,6 +12,7 @@ import auth from "../../../AuthComponent/auth";
 const NavBarWrapper = styled.div`
   display: grid;
   grid-template-columns: 4fr 1fr;
+  margin-bottom: 20px;
 `;
 const NavWrapper = styled.nav`
   display: flex;

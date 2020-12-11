@@ -45,7 +45,7 @@ const StyledLabel = styled.label`
   transform: translateY(-50%);
   transition: 0.3s ease-in-out;
   cursor: pointer;
-  color: ${theme.colors.primaryColor};
+  color: ${theme.colors.primary};
 `;
 
 const StyledBar = styled.div`

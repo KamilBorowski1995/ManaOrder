@@ -3,15 +3,16 @@ import styled from "styled-components";
 
 import { theme } from "../../../theme/mainTheme";
 
-const StyledButton = styled.p`
-  font-size: ${theme.fontSize.l};
+const StyledParagraph = styled.p`
+  font-size: ${theme.fontSize.xl};
   font-family: ${theme.secondaryFont};
   font-weight: ${({ weight }) => weight};
   color: ${theme.colors.primary};
+  transition: 0.3s ease-in-out;
 `;
 
-const Paragraph = ({ children, weight }) => {
-  return <StyledButton weight={weight}>{children}</StyledButton>;
+const Paragraph = ({ children, weight = 500 }) => {
+  return <StyledParagraph weight={weight}>{children}</StyledParagraph>;
 };
 
 export default Paragraph;
