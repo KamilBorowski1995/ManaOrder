@@ -11,6 +11,8 @@ import userImage from "../../assets/svg/user.svg";
 
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 
+const Wrapper = styled.div``;
+
 const activeClassName = "nav-item-active";
 
 const StyledNavLink = styled(NavLink).attrs({ activeClassName })`
@@ -38,24 +40,24 @@ const StyledImg = styled.img`
 
 const NavCategory = () => {
   return (
-    <div>
+    <Wrapper>
       <StyledNavLink exact activeClassName="active" to="/">
         <StyledImg src={boxImage} alt="orders" />
-        <Paragraph>Zamówienia</Paragraph>
+        <Paragraph size="xl">Zamówienia</Paragraph>
       </StyledNavLink>
-      <StyledNavLink activeClassName="active" to="/orders">
+      <StyledNavLink activeClassName="active" to="/consumers">
         <StyledImg src={clientImage} alt="clients" />
-        <Paragraph>Baza klientów</Paragraph>
+        <Paragraph size="xl">Baza klientów</Paragraph>
       </StyledNavLink>
       <StyledNavLink to="/orders">
         <StyledImg src={openBoxImage} alt="products" />
-        <Paragraph>Produkty</Paragraph>
+        <Paragraph size="xl">Produkty</Paragraph>
       </StyledNavLink>
       <StyledNavLink to="/orders">
         <StyledImg src={userImage} alt="users" />
-        <Paragraph>Użytkownicy</Paragraph>
+        <Paragraph size="xl">Użytkownicy</Paragraph>
       </StyledNavLink>
-    </div>
+    </Wrapper>
   );
 };
 

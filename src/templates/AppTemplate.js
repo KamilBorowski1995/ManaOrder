@@ -15,13 +15,17 @@ const ContentWrapper = styled.div`
   display: flex;
 `;
 
+const StyledWrapperChildren = styled.div`
+  margin-left: 150px;
+`;
+
 const MainTemplate = ({ children }) => {
   return (
     <Wrapper>
       <NavBar />
       <ContentWrapper>
         <NavCategory />
-        {children}
+        <StyledWrapperChildren>{children}</StyledWrapperChildren>
       </ContentWrapper>
     </Wrapper>
   );

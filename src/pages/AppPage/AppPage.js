@@ -1,5 +1,8 @@
 import React from "react";
 import styled from "styled-components";
+import { useHistory } from "react-router-dom";
+
+import auth from "../../AuthComponent/auth";
 
 import AppTemplate from "../../templates/AppTemplate";
 
@@ -43,19 +46,17 @@ const baseOrders = [
 ];
 
 const Wrapper = styled.div`
-  margin-left: 150px;
+  /* margin-left: 150px; */
   position: relative;
 `;
+
 const StyledElementList = styled.div`
   margin-bottom: 20px;
 `;
 
-const StyledButonSquare = styled(ButtonSquare)`
-  position: absolute;
-  right: 0;
-`;
-
 const AppPage = () => {
+  const history = useHistory();
+
   const orderMap = baseOrders.map(
     ({ id, firstName, lastName, phone, mail, status }) => (
       <StyledElementList>
@@ -72,11 +73,19 @@ const AppPage = () => {
     )
   );
 
+  const handleButtonToAddOrder = () => {
+    console.log("klikam");
+    console.log(auth.isAuthenticated());
+    if (auth.isAuthenticated()) history.push("/orders/add");
+  };
+
   return (
     <AppTemplate>
       <Wrapper>
         {orderMap}
-        <ButtonSquare>DODAJ NOWE ZAMÓWIENIE</ButtonSquare>
+        <ButtonSquare onClick={handleButtonToAddOrder}>
+          DODAJ NOWE ZAMÓWIENIE
+        </ButtonSquare>
       </Wrapper>
     </AppTemplate>
   );
