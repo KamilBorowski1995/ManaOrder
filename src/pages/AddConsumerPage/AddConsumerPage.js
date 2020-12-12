@@ -26,7 +26,6 @@ const WrapperNotes = styled.div`
 `;
 
 const initialState = {
-  id: "",
   firstName: "",
   lastName: "",
   companyName: "",
@@ -59,12 +58,6 @@ const AddConsumerPage = () => {
     <AppTemplate>
       <Wrapper>
         <WrapperConsumerData>
-          <ElementTable
-            onChange={handleValue}
-            data={state.id}
-            title="Numer Klienta"
-            name="id"
-          />
           <ElementTable
             onChange={handleValue}
             data={state.firstName}

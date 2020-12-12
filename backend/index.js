@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 const cors = require("cors");
 
+const consumersRoute = require("./routes/consumers");
+
 dotenv.config();
 
 mongoose.connect(
@@ -14,6 +16,8 @@ mongoose.connect(
 
 app.use(express.json());
 app.use(cors({ origin: true, credentials: true }));
+
+app.use("/api/consumers", consumersRoute);
 
 app.listen(5000, () =>
   console.log("serwer włączony na porcie 5000: http://localhost:5000")
