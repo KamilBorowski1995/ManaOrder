@@ -10,15 +10,6 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-const BoxWrapper = styled.div`
-  min-width: 280px;
-
-  max-width: 300px;
-  :nth-last-of-type(1) {
-    margin-right: 100px;
-  }
-`;
-
 const StyledText = styled.p`
   /* display: inline-block; */
   color: ${theme.colors.primary};
@@ -38,6 +29,7 @@ const StyledText = styled.p`
 `;
 
 const OrderList = ({
+  type,
   id,
   firstName,
   lastName,
@@ -48,21 +40,33 @@ const OrderList = ({
   code,
   number,
   city,
+  cost,
+  nameProduct,
 }) => {
+  const fixCost = (cost) => {
+    if (cost ^ 0) return parseInt(cost).toFixed(2);
+
+    return cost;
+  };
+
   return (
     <Wrapper>
-      {/* <BoxWrapper>
-        <StyledText>{id}</StyledText>
-      </BoxWrapper> */}
+      {/* {type === "product" && <StyledText>{id}</StyledText>} */}
+      {type === "product" && <StyledText>{nameProduct}</StyledText>}
+      {type === "product" && <StyledText>{`${fixCost(cost)}zł`}</StyledText>}
 
-      <StyledText>
-        {firstName} {lastName}
-      </StyledText>
-      <StyledText>{phone}</StyledText>
-      <StyledText>{email}</StyledText>
-      <StyledText>
-        ul.{street} {number}, {code} {city}
-      </StyledText>
+      {type === "consumer" && (
+        <StyledText>
+          {firstName} {lastName}{" "}
+        </StyledText>
+      )}
+      {type === "consumer" && <StyledText>{phone}</StyledText>}
+      {type === "consumer" && <StyledText>{email}</StyledText>}
+      {type === "consumer" && (
+        <StyledText>
+          ul.{street} {number}, {code} {city}{" "}
+        </StyledText>
+      )}
 
       {/* <BoxWrapper>
         <StyledText>{status}</StyledText>

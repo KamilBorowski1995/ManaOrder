@@ -61,6 +61,7 @@ const AppPage = () => {
     ({ id, firstName, lastName, phone, mail, status }) => (
       <StyledElementList>
         <OrderList
+          type="consumer"
           key={id}
           id={id}
           firstName={firstName}

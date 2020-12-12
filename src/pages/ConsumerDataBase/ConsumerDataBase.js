@@ -48,9 +48,7 @@ const ConsumerDataBase = () => {
       .catch(function (error) {
         console.log(error);
       })
-      .then(function () {
-        console.log(data);
-      });
+      .then(function () {});
   }, []);
 
   const handleClickButton = () => {
@@ -74,6 +72,7 @@ const ConsumerDataBase = () => {
           }) => (
             <div key={id}>
               <OrderList
+                type="consumer"
                 firstName={firstName}
                 lastName={lastName}
                 phone={phone}
