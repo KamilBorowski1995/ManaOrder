@@ -4,7 +4,6 @@ const Consumer = require("../model/consumer.schema");
 
 router.post("/add", async (req, res) => {
   const newConsumer = req.body.newConsumer;
-  console.log(newConsumer);
   const consumer = new Consumer({
     firstName: newConsumer.firstName,
     lastName: newConsumer.lastName,

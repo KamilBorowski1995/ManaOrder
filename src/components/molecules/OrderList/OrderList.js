@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const BoxWrapper = styled.div`
-  min-width: 200px;
+  min-width: 250px;
 
   max-width: 300px;
   :nth-last-of-type(1) {
@@ -30,12 +30,12 @@ const StyledText = styled.p`
   white-space: nowrap;
 `;
 
-const OrderList = ({ id, firstName, lastName, phone, mail, status }) => {
+const OrderList = ({ id, firstName, lastName, phone, email, status }) => {
   return (
     <Wrapper>
-      <BoxWrapper>
+      {/* <BoxWrapper>
         <StyledText>{id}</StyledText>
-      </BoxWrapper>
+      </BoxWrapper> */}
       <BoxWrapper>
         <StyledText>{`${firstName} ${lastName}`}</StyledText>
       </BoxWrapper>
@@ -43,11 +43,11 @@ const OrderList = ({ id, firstName, lastName, phone, mail, status }) => {
         <StyledText>{phone}</StyledText>
       </BoxWrapper>
       <BoxWrapper>
-        <StyledText>{mail}</StyledText>
+        <StyledText>{email}</StyledText>
       </BoxWrapper>
-      <BoxWrapper>
+      {/* <BoxWrapper>
         <StyledText>{status}</StyledText>
-      </BoxWrapper>
+      </BoxWrapper> */}
 
       <ButtonSquare>Edytuj</ButtonSquare>
     </Wrapper>

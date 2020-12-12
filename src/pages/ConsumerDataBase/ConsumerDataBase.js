@@ -1,10 +1,14 @@
 import React, { useEffect, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
 import AppTemplate from "../../templates/AppTemplate";
 
-import ElementTable from "../../components/molecules/ElementTable";
+import OrderList from "../../components/molecules/OrderList/OrderList";
+
+import Paragraph from "../../components/atoms/Paragraph/Paragraph";
+import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 
 const Wrapper = styled.div`
   max-height: 500px;
@@ -26,7 +30,14 @@ const Wrapper = styled.div`
   }
 `;
 
+const WrapperMapObject = styled.div`
+  /* display: flex;
+  justify-content: space-between; */
+`;
+
 const ConsumerDataBase = () => {
+  const history = useHistory();
+
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -43,21 +54,26 @@ const ConsumerDataBase = () => {
       });
   }, []);
 
+  const handleClickButton = () => {
+    history.push("consumers/add");
+  };
+
   return (
     <AppTemplate>
       <Wrapper>
-        {console.log(data)}
-        {data.map(({ id, firstName, lastName, companyName, phone, email }) => (
-          <div key={id}>
-            <p>Użytkownik</p>
-            <p>
-              {firstName} {lastName}
-            </p>
-            <p>{companyName}</p>
-            <p>{phone} </p>
-            <p>{email} </p>
-          </div>
+        {data.map(({ id, firstName, lastName, phone, email }) => (
+          <WrapperMapObject key={id}>
+            <OrderList
+              firstName={firstName}
+              lastName={lastName}
+              phone={phone}
+              email={email}
+            />
+          </WrapperMapObject>
         ))}
+        <ButtonSquare onClick={handleClickButton}>
+          Dodaj nowego klienta
+        </ButtonSquare>
       </Wrapper>
     </AppTemplate>
   );
