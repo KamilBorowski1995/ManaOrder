@@ -27,9 +27,9 @@ router.post("/add", async (req, res) => {
 });
 
 router.get("/", async (req, res) => {
-  const findUser = await Consumer.find({});
+  const findConsumer = await Consumer.find({});
 
-  res.send(findUser);
+  res.send(findConsumer);
 });
 
 module.exports = router;

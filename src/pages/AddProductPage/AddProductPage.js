@@ -35,31 +35,22 @@ const AddProductPage = () => {
   const handleClickButton = () => {
     console.log(state);
 
-    // const newConsumer = {
-    //   firstName: state.firstName,
-    //   lastName: state.lastName,
-    //   companyName: state.companyName,
-    //   NIP: state.NIP,
-    //   street: state.street,
-    //   number: state.number,
-    //   code: state.code,
-    //   city: state.city,
-    //   phone: state.phone,
-    //   email: state.email,
-    //   notes: state.notes,
-    // };
+    const newConsumer = {
+      nameProduct: state.nameProduct,
+      cost: state.cost,
+    };
 
-    // axios
-    //   .post("http://localhost:5000/api/", {
-    //     newConsumer,
-    //   })
-    //   .then(function (response) {
-    //     console.log(response);
-    //     history.push("/consumers");
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   });
+    axios
+      .post("http://localhost:5000/api/products/add", {
+        newConsumer,
+      })
+      .then(function (response) {
+        console.log(response);
+        history.push("/products");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <AppTemplate>
