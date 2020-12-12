@@ -26,23 +26,9 @@ const WrapperNotes = styled.div`
   position: relative;
 `;
 
-const initialState = {
-  firstName: "",
-  lastName: "",
-  companyName: "",
-  NIP: "",
-  street: "",
-  number: "",
-  code: "",
-  city: "",
-  phone: "",
-  email: "",
-  notes: "",
-};
-
 const AddConsumerPage = () => {
   const history = useHistory();
-  const [state, dispatch] = useReducer(addConsumerReducer, initialState);
+  const [state, dispatch] = useReducer(addConsumerReducer, {});
 
   const handleValue = (e) =>
     dispatch({
@@ -52,6 +38,8 @@ const AddConsumerPage = () => {
     });
 
   const handleClickButton = () => {
+    console.log(state);
+
     const newConsumer = {
       firstName: state.firstName,
       lastName: state.lastName,

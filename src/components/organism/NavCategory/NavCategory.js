@@ -41,15 +41,15 @@ const StyledImg = styled.img`
 const NavCategory = () => {
   return (
     <Wrapper>
-      <StyledNavLink exact activeClassName="active" to="/">
+      <StyledNavLink exact to="/">
         <StyledImg src={boxImage} alt="orders" />
         <Paragraph size="xl">Zamówienia</Paragraph>
       </StyledNavLink>
-      <StyledNavLink activeClassName="active" to="/consumers">
+      <StyledNavLink to="/consumers">
         <StyledImg src={clientImage} alt="clients" />
         <Paragraph size="xl">Baza klientów</Paragraph>
       </StyledNavLink>
-      <StyledNavLink to="/orders">
+      <StyledNavLink to="/products">
         <StyledImg src={openBoxImage} alt="products" />
         <Paragraph size="xl">Produkty</Paragraph>
       </StyledNavLink>

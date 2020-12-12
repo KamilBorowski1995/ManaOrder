@@ -34,7 +34,7 @@ const HomePage = () => {
     <MainTemplate>
       <ContentWrapper>
         <HeaderWrapper>
-          <Header>Zarządzaj swoimi zamówieniami z jednego miejsca.</Header>
+          <Header>Wszystkie twoje zamówienia w jednym miejscu</Header>
           <ButtonWrapper>
             <Button onClick={handleClick} primaryColor="true">
               Wypróbuj za darmo

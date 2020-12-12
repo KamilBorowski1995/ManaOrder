@@ -9,7 +9,9 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import AddOrder from "./pages/AddOrder";
 import ConsumerDataBase from "./pages/ConsumerDataBase";
+import ProductsPage from "./pages/ProductsPage";
 import AddConsumerPage from "./pages/AddConsumerPage";
+import AddProductPage from "./pages/AddProductPage";
 
 import ProtectedRoute from "./AuthComponent/protected.route";
 
@@ -34,6 +36,8 @@ function App() {
         />
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/orders" component={AppPage} />
+        <Route exact path="/products" component={ProductsPage} />
+        <Route exact path="/products/add" component={AddProductPage} />
         <Route exact path="/consumers" component={ConsumerDataBase} />
         <Route exact path="/consumers/add" component={AddConsumerPage} />
         <Route exact path="/orders/add" component={AddOrder} />
