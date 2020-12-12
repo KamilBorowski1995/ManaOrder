@@ -57,7 +57,7 @@ const StyledBar = styled.div`
 const Input = ({ value, type, data }) => {
   return (
     <Wrapper>
-      <StyledInput placeholder="" name={value} type={type} value={data} />
+      <StyledInput placeholder=" " name={value} type={type} value={data} />
       <StyledLabel htmlFor={value}>{value}</StyledLabel>
       <StyledBar></StyledBar>
     </Wrapper>

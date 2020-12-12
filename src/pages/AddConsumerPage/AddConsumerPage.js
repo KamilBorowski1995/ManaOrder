@@ -1,6 +1,7 @@
 import React, { useReducer } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import AppTemplate from "../../templates/AppTemplate";
 
@@ -51,8 +52,31 @@ const AddConsumerPage = () => {
     });
 
   const handleClickButton = () => {
-    console.log(state);
-    history.push("/consumers");
+    const newConsumer = {
+      firstName: state.firstName,
+      lastName: state.lastName,
+      companyName: state.companyName,
+      NIP: state.NIP,
+      street: state.street,
+      number: state.number,
+      code: state.code,
+      city: state.city,
+      phone: state.phone,
+      email: state.email,
+      notes: state.notes,
+    };
+
+    axios
+      .post("http://localhost:5000/api/consumers/add", {
+        newConsumer,
+      })
+      .then(function (response) {
+        console.log(response);
+        history.push("/consumers");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
   return (
     <AppTemplate>

@@ -1,5 +1,6 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import axios from "axios";
 
 import AppTemplate from "../../templates/AppTemplate";
 
@@ -26,27 +27,37 @@ const Wrapper = styled.div`
 `;
 
 const ConsumerDataBase = () => {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/consumers")
+      .then((res) => {
+        setData(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {
+        console.log(data);
+      });
+  }, []);
+
   return (
     <AppTemplate>
       <Wrapper>
-        <ElementTable data="#48621547895">Numer Zamówienia:</ElementTable>
-        <ElementTable data="#98579985657">Numer Klienta:</ElementTable>
-        <ElementTable data="Piotr Kowalski">Imię i nazwisko:</ElementTable>
-        <ElementTable data="Wywozimy Grazimy WCewódki">
-          Pełna nazwa firmy:
-        </ElementTable>
-        <ElementTable data="#48621547895">Numer Zamówienia:</ElementTable>
-        <ElementTable data="#98579985657">Numer Klienta:</ElementTable>
-        <ElementTable data="Piotr Kowalski">Imię i nazwisko:</ElementTable>
-        <ElementTable data="Wywozimy Grazimy WCewódki">
-          Pełna nazwa firmy:
-        </ElementTable>
-        <ElementTable data="#48621547895">Numer Zamówienia:</ElementTable>
-        <ElementTable data="#98579985657">Numer Klienta:</ElementTable>
-        <ElementTable data="Piotr Kowalski">Imię i nazwisko:</ElementTable>
-        <ElementTable data="Wywozimy Grazimy WCewódki">
-          Pełna nazwa firmy:
-        </ElementTable>
+        {console.log(data)}
+        {data.map(({ id, firstName, lastName, companyName, phone, email }) => (
+          <div key={id}>
+            <p>Użytkownik</p>
+            <p>
+              {firstName} {lastName}
+            </p>
+            <p>{companyName}</p>
+            <p>{phone} </p>
+            <p>{email} </p>
+          </div>
+        ))}
       </Wrapper>
     </AppTemplate>
   );
