@@ -9,6 +9,7 @@ import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import AddOrder from "./pages/AddOrder";
 import ConsumerDataBase from "./pages/ConsumerDataBase";
+import AddConsumerPage from "./pages/AddConsumerPage";
 
 import ProtectedRoute from "./AuthComponent/protected.route";
 
@@ -21,6 +22,7 @@ const Wrapper = styled.div`
 function App() {
   return (
     // Poprawić routingi aby przy wejściu na zakzaną stronę nie tylko renderowało stronę główną ale takze zmieniało adress w przeglądarce. Może redirect?
+    // Dodać chat wewnętrzny dla pracowników
 
     <BrowserRouter>
       <Wrapper>
@@ -33,6 +35,7 @@ function App() {
         <Route exact path="/login" component={LoginPage} />
         <Route exact path="/orders" component={AppPage} />
         <Route exact path="/consumers" component={ConsumerDataBase} />
+        <Route exact path="/consumers/add" component={AddConsumerPage} />
         <Route exact path="/orders/add" component={AddOrder} />
       </Wrapper>
     </BrowserRouter>

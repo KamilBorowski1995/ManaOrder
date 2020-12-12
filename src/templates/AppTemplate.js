@@ -12,8 +12,11 @@ const Wrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  display: flex;
+  display: grid;
+  grid-template-columns: 230px auto;
 `;
+
+const StyledNavCategory = styled.div``;
 
 const StyledWrapperChildren = styled.div`
   margin-left: 150px;
@@ -24,7 +27,11 @@ const MainTemplate = ({ children }) => {
     <Wrapper>
       <NavBar />
       <ContentWrapper>
-        <NavCategory />
+        <StyledNavCategory>
+          {" "}
+          <NavCategory />
+        </StyledNavCategory>
+
         <StyledWrapperChildren>{children}</StyledWrapperChildren>
       </ContentWrapper>
     </Wrapper>
