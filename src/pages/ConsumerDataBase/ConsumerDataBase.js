@@ -7,7 +7,6 @@ import AppTemplate from "../../templates/AppTemplate";
 
 import OrderList from "../../components/molecules/OrderList/OrderList";
 
-import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 
 const Wrapper = styled.div`
@@ -30,9 +29,9 @@ const Wrapper = styled.div`
   }
 `;
 
-const WrapperMapObject = styled.div`
-  /* display: flex;
-  justify-content: space-between; */
+const StyledButton = styled(ButtonSquare)`
+  margin-top: 20px;
+  margin-right: 30px;
 `;
 
 const ConsumerDataBase = () => {
@@ -61,19 +60,35 @@ const ConsumerDataBase = () => {
   return (
     <AppTemplate>
       <Wrapper>
-        {data.map(({ id, firstName, lastName, phone, email }) => (
-          <WrapperMapObject key={id}>
-            <OrderList
-              firstName={firstName}
-              lastName={lastName}
-              phone={phone}
-              email={email}
-            />
-          </WrapperMapObject>
-        ))}
-        <ButtonSquare onClick={handleClickButton}>
+        {data.map(
+          ({
+            id,
+            firstName,
+            lastName,
+            phone,
+            email,
+            street,
+            code,
+            number,
+            city,
+          }) => (
+            <div key={id}>
+              <OrderList
+                firstName={firstName}
+                lastName={lastName}
+                phone={phone}
+                email={email}
+                street={street}
+                code={code}
+                number={number}
+                city={city}
+              />
+            </div>
+          )
+        )}
+        <StyledButton onClick={handleClickButton}>
           Dodaj nowego klienta
-        </ButtonSquare>
+        </StyledButton>
       </Wrapper>
     </AppTemplate>
   );

@@ -21,8 +21,12 @@ const StyledButton = styled.button`
   }
 `;
 
-const ButtonSquare = ({ children, onClick }) => {
-  return <StyledButton onClick={onClick}>{children}</StyledButton>;
+const ButtonSquare = ({ children, onClick, className }) => {
+  return (
+    <StyledButton className={className} onClick={onClick}>
+      {children}
+    </StyledButton>
+  );
 };
 
 export default ButtonSquare;

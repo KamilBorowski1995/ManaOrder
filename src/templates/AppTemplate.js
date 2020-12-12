@@ -28,7 +28,6 @@ const MainTemplate = ({ children }) => {
       <NavBar />
       <ContentWrapper>
         <StyledNavCategory>
-          {" "}
           <NavCategory />
         </StyledNavCategory>
 

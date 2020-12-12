@@ -11,7 +11,7 @@ const Wrapper = styled.div`
 `;
 
 const BoxWrapper = styled.div`
-  min-width: 250px;
+  min-width: 280px;
 
   max-width: 300px;
   :nth-last-of-type(1) {
@@ -28,23 +28,42 @@ const StyledText = styled.p`
   margin: 0;
   padding: 10px 30px;
   white-space: nowrap;
+
+  min-width: 280px;
+
+  max-width: 300px;
+  :nth-last-of-type(1) {
+    margin-right: 100px;
+  }
 `;
 
-const OrderList = ({ id, firstName, lastName, phone, email, status }) => {
+const OrderList = ({
+  id,
+  firstName,
+  lastName,
+  phone,
+  email,
+  status,
+  street,
+  code,
+  number,
+  city,
+}) => {
   return (
     <Wrapper>
       {/* <BoxWrapper>
         <StyledText>{id}</StyledText>
       </BoxWrapper> */}
-      <BoxWrapper>
-        <StyledText>{`${firstName} ${lastName}`}</StyledText>
-      </BoxWrapper>
-      <BoxWrapper>
-        <StyledText>{phone}</StyledText>
-      </BoxWrapper>
-      <BoxWrapper>
-        <StyledText>{email}</StyledText>
-      </BoxWrapper>
+
+      <StyledText>
+        {firstName} {lastName}
+      </StyledText>
+      <StyledText>{phone}</StyledText>
+      <StyledText>{email}</StyledText>
+      <StyledText>
+        ul.{street} {number}, {code} {city}
+      </StyledText>
+
       {/* <BoxWrapper>
         <StyledText>{status}</StyledText>
       </BoxWrapper> */}
