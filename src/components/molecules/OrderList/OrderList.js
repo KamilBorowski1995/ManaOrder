@@ -14,7 +14,7 @@ const StyledText = styled.p`
   /* display: inline-block; */
   color: ${theme.colors.primary};
   font-size: ${theme.fontSize.l};
-  font-weight: bold;
+  font-weight: 500;
   flex-grow: 1;
   margin: 0;
   padding: 10px 30px;
@@ -42,6 +42,8 @@ const OrderList = ({
   city,
   cost,
   nameProduct,
+  password,
+  role,
 }) => {
   const fixCost = (cost) => {
     if (cost ^ 0) return parseInt(cost).toFixed(2);
@@ -52,14 +54,18 @@ const OrderList = ({
   return (
     <Wrapper>
       {/* {type === "product" && <StyledText>{id}</StyledText>} */}
-      {type === "product" && <StyledText>{nameProduct}</StyledText>}
-      {type === "product" && <StyledText>{`${fixCost(cost)}zł`}</StyledText>}
+      {type === "product" && <StyledText>Nazwa : {nameProduct}</StyledText>}
+      {type === "product" && (
+        <StyledText>Cena: {`${fixCost(cost)}zł`}</StyledText>
+      )}
 
-      {type === "consumer" && (
+      {(type === "consumer" || type === "user") && (
         <StyledText>
-          {firstName} {lastName}{" "}
+          {firstName} {lastName}
         </StyledText>
       )}
+      {type === "user" && <StyledText>{password}</StyledText>}
+      {type === "user" && <StyledText>{role}</StyledText>}
       {type === "consumer" && <StyledText>{phone}</StyledText>}
       {type === "consumer" && <StyledText>{email}</StyledText>}
       {type === "consumer" && (

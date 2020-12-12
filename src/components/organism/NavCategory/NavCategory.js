@@ -53,7 +53,7 @@ const NavCategory = () => {
         <StyledImg src={openBoxImage} alt="products" />
         <Paragraph size="xl">Produkty</Paragraph>
       </StyledNavLink>
-      <StyledNavLink to="/orders">
+      <StyledNavLink to="/users">
         <StyledImg src={userImage} alt="users" />
         <Paragraph size="xl">Użytkownicy</Paragraph>
       </StyledNavLink>

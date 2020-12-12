@@ -12,6 +12,7 @@ import ConsumerDataBase from "./pages/ConsumerDataBase";
 import ProductsPage from "./pages/ProductsPage";
 import AddConsumerPage from "./pages/AddConsumerPage";
 import AddProductPage from "./pages/AddProductPage";
+import UsersPage from "./pages/UsersPage";
 
 import ProtectedRoute from "./AuthComponent/protected.route";
 
@@ -40,6 +41,8 @@ function App() {
         <Route exact path="/products/add" component={AddProductPage} />
         <Route exact path="/consumers" component={ConsumerDataBase} />
         <Route exact path="/consumers/add" component={AddConsumerPage} />
+        <Route exact path="/users" component={UsersPage} />
+        <Route exact path="/users/add" component={AddConsumerPage} />
         <Route exact path="/orders/add" component={AddOrder} />
       </Wrapper>
     </BrowserRouter>
