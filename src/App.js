@@ -14,6 +14,7 @@ import AddConsumerPage from "./pages/AddConsumerPage";
 import AddProductPage from "./pages/AddProductPage";
 import UsersPage from "./pages/UsersPage";
 import AddUserPage from "./pages/AddUserPage";
+import AddOrderPage from "./pages/AddOrderPage";
 
 import ProtectedRoute from "./AuthComponent/protected.route";
 
@@ -27,6 +28,7 @@ function App() {
   return (
     // Poprawić routingi aby przy wejściu na zakzaną stronę nie tylko renderowało stronę główną ale takze zmieniało adress w przeglądarce. Może redirect?
     // Dodać chat wewnętrzny dla pracowników
+    // Poprawić nawigacnę główną. Klikalne całe
 
     <BrowserRouter>
       <Wrapper>
@@ -44,7 +46,7 @@ function App() {
         <Route exact path="/consumers/add" component={AddConsumerPage} />
         <Route exact path="/users" component={UsersPage} />
         <Route exact path="/users/add" component={AddUserPage} />
-        <Route exact path="/orders/add" component={AddOrder} />
+        <Route exact path="/orders/add" component={AddOrderPage} />
       </Wrapper>
     </BrowserRouter>
   );

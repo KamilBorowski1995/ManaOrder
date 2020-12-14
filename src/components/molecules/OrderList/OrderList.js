@@ -85,7 +85,7 @@ const OrderList = ({
         <StyledText>{status}</StyledText>
       </BoxWrapper> */}
 
-      <ButtonSquare>Edytuj</ButtonSquare>
+      {/* <ButtonSquare>Edytuj</ButtonSquare> */}
     </Wrapper>
   );
 };
