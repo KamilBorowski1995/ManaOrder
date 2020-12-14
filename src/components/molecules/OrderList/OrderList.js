@@ -47,8 +47,15 @@ const OrderList = ({
 }) => {
   const fixCost = (cost) => {
     if (cost ^ 0) return parseInt(cost).toFixed(2);
-
     return cost;
+  };
+
+  const fixPassword = (password) => {
+    let hashPass = "";
+    for (let i = 0; i < password.length; i++) {
+      hashPass = hashPass + "*";
+    }
+    return hashPass;
   };
 
   return (
@@ -64,7 +71,7 @@ const OrderList = ({
           {firstName} {lastName}
         </StyledText>
       )}
-      {type === "user" && <StyledText>{password}</StyledText>}
+      {type === "user" && <StyledText>{fixPassword(password)}</StyledText>}
       {type === "user" && <StyledText>{role}</StyledText>}
       {type === "consumer" && <StyledText>{phone}</StyledText>}
       {type === "consumer" && <StyledText>{email}</StyledText>}

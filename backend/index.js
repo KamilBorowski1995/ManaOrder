@@ -6,6 +6,7 @@ const cors = require("cors");
 
 const consumersRoute = require("./routes/consumers");
 const productsRoute = require("./routes/products");
+const usersRoute = require("./routes/users");
 
 dotenv.config();
 
@@ -20,6 +21,7 @@ app.use(cors({ origin: true, credentials: true }));
 
 app.use("/api/consumers", consumersRoute);
 app.use("/api/products", productsRoute);
+app.use("/api/users", usersRoute);
 
 app.listen(5000, () =>
   console.log("serwer włączony na porcie 5000: http://localhost:5000")

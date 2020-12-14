@@ -41,7 +41,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/consumers")
+      .get("http://localhost:5000/api/users")
       .then((res) => {
         console.log(res.data);
         setData(res.data);
