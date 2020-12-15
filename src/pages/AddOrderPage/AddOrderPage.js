@@ -12,6 +12,7 @@ import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect";
 
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import { selectReducer } from "../../reducers/selectConsumer.reducer";
+import { selectProducts } from "../../reducers/selectProducts.reducer";
 
 const Wrapper = styled.div`
   display: grid;
@@ -33,10 +34,12 @@ const AddOrderPage = () => {
   const history = useHistory();
 
   const [allConsumer, setAllConsumer] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
   const [allProduct, setAllProduct] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [activeProduct, setActiveProduct] = useState({});
 
   const [state, dispatch] = useReducer(selectReducer, []);
+  const [stateProducts, dispatchProducts] = useReducer(selectProducts, []);
 
   useEffect(() => {
     axios
@@ -98,11 +101,25 @@ const AddOrderPage = () => {
       });
   };
 
-  const handleSelect = (e) => {
+  const handleSelectConsumer = (e) => {
     console.log(e);
     const id = e.value;
     const selectedData = allConsumer.filter(({ _id }) => _id === id);
     dispatch({ type: "SELECT_VALUE", state: selectedData[0] });
+    console.log(state);
+  };
+
+  const handleSelectProduct = (e) => {
+    const id = e.value;
+    const selectedData = allProduct.filter(({ _id }) => _id === id);
+    setActiveProduct(selectedData);
+  };
+
+  const handleButtonAddProduct = () => {
+    setIsOpen(false);
+    dispatchProducts({ type: "SELECT_VALUE", data: activeProduct[0] });
+    // setActiveProduct({});
+    console.log(stateProducts);
   };
 
   return (
@@ -113,7 +130,7 @@ const AddOrderPage = () => {
             name="consumer"
             title="Klient: "
             options={allConsumer}
-            onChange={handleSelect}
+            onChange={handleSelectConsumer}
           />
           {state.length !== 0 && (
             <div>
@@ -145,9 +162,9 @@ const AddOrderPage = () => {
                 name="product"
                 title=""
                 options={allProduct}
-                // onChange={handleSelect}
+                onChange={handleSelectProduct}
               />
-              <ButtonSquare onClick={() => setIsOpen(false)}>
+              <ButtonSquare onClick={handleButtonAddProduct}>
                 Dodaj
               </ButtonSquare>
             </div>
@@ -156,6 +173,9 @@ const AddOrderPage = () => {
               Kolejny produkt
             </ButtonSquare>
           )}
+          {stateProducts.map(({ cost, nameProduct }) => (
+            <InformationElement data={cost} title={nameProduct} />
+          ))}
         </WrapperNotes>
       </Wrapper>
     </AppTemplate>
