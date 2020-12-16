@@ -4,6 +4,7 @@ import { Link, useHistory } from "react-router-dom";
 
 import Logo from "../../assets/svg/Logo.svg";
 import Button from "../../atoms/Button/Button";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 import { theme } from "../../../theme/mainTheme";
 
@@ -11,13 +12,17 @@ import Auth from "../../../AuthComponent/auth";
 
 const NavBarWrapper = styled.div`
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: max-content 4fr 1fr;
   margin-bottom: 20px;
 `;
 const NavWrapper = styled.nav`
   display: flex;
   /* justify-content: space-between; */
   align-items: center;
+`;
+
+const StyledUserName = styled.div`
+  margin-left: 30px;
 `;
 
 const StyledLink = styled(Link)`
@@ -36,6 +41,7 @@ const StyledLogo = styled(Link)`
 
 const NavBar = () => {
   const [userIsLogged, setUserIsLogged] = useState(false);
+  const [userName, setUserName] = useState("");
 
   const history = useHistory();
 
@@ -52,15 +58,24 @@ const NavBar = () => {
   };
 
   useEffect(() => {
+    setUserName(sessionStorage.getItem("user"));
     setUserIsLogged(Auth.isAuthenticated());
   }, []);
 
   return (
     <NavBarWrapper>
-      <StyledLogo to="/">
-        <img onClick={handleClickLogo} src={Logo} alt="logo ManaOrder" />
-      </StyledLogo>
+      <div>
+        <StyledLogo to="/">
+          <img onClick={handleClickLogo} src={Logo} alt="logo ManaOrder" />
+        </StyledLogo>
+      </div>
 
+      {userName !== "" && (
+        <StyledUserName>
+          {" "}
+          <Paragraph>Witaj {userName}</Paragraph>
+        </StyledUserName>
+      )}
       <NavWrapper>
         <StyledLink to="/">FAQ</StyledLink>
         <StyledLink to="/">Kontakt</StyledLink>

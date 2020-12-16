@@ -24,20 +24,18 @@ const Form = () => {
     e.preventDefault();
     axios
       .get("http://localhost:5000/api/users/login", {
-        params: {
-          login,
-          password,
-        },
+        params: { login, password },
       })
       .then(function (response) {
         console.log(response);
-        Auth.login(() => history.push("/"));
+        console.log(response.headers);
+        Auth.login(() => history.push("/"), response.data);
       })
       .catch(function (error) {
         setError(error.response.data);
         // console.log(response);
       })
-      .then(function () {
+      .then(function (e) {
         // always executed
       });
   };

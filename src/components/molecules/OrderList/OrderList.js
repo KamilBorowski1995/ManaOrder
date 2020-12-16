@@ -17,11 +17,12 @@ const Wrapper = styled.div`
 const StyledText = styled.p`
   color: ${theme.colors.primary};
   font-size: ${theme.fontSize.m};
-  font-weight: 500;
+  font-weight: ${({ weight }) => (weight === "bold" ? "bold" : "500")};
   padding: 10px 0px;
   :nth-last-of-type(1) {
     margin-right: 100px;
   }
+  overflow: hidden;
 `;
 
 const OrderList = ({
@@ -87,6 +88,11 @@ const OrderList = ({
         <StyledText>{email}</StyledText>
       )}
       {type === "order" && (
+        // <div>
+        //   <StyledText weight="bold">Status:</StyledText>
+        //   <StyledText>{status}</StyledText>
+        // </div>
+
         <StyledText>
           Status: <br />
           {status}
