@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import styled from "styled-components";
+
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -10,50 +10,6 @@ import AppTemplate from "../../templates/AppTemplate";
 import OrderList from "../../components/molecules/OrderList/OrderList";
 
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
-
-const baseOrders = [
-  {
-    id: "#48464864682",
-    firstName: "Piotr",
-    lastName: "Kowalski",
-    phone: "500-800-965",
-    mail: "k.borowski@onet.pl",
-    status: "Oczekiwanie na płatność",
-  },
-  {
-    id: "#fwwfwf",
-    firstName: "Piotr",
-    lastName: "Kowalski",
-    phone: "500-800-965",
-    mail: "k.borowski@onet.pl",
-    status: "Wysłane",
-  },
-  {
-    id: "#adwwdwd",
-    firstName: "Piotr",
-    lastName: "Kowalski",
-    phone: "500-800-965",
-    mail: "k.borowski@onet.pl",
-    status: "Zaginęła w akcji",
-  },
-  {
-    id: "#fcd7fc682",
-    firstName: "Piotr",
-    lastName: "Kowalski",
-    phone: "500-800-965",
-    mail: "k.borowski@onet.pl",
-    status: "W oczekiwaniu na kuriera",
-  },
-];
-
-const Wrapper = styled.div`
-  /* margin-left: 150px; */
-  position: relative;
-`;
-
-const StyledElementList = styled.div`
-  margin-bottom: 20px;
-`;
 
 const AppPage = () => {
   const history = useHistory();
@@ -74,31 +30,32 @@ const AppPage = () => {
   }, []);
 
   const handleButtonToAddOrder = () => {
-    console.log("klikam");
     console.log(auth.isAuthenticated());
     if (auth.isAuthenticated()) history.push("/orders/add");
   };
 
   return (
     <AppTemplate>
-      <Wrapper>
-        {data.map(({ consumer, products, tracking }) => (
-          <div key={consumer._id}>
-            <OrderList
-              type="order"
-              id={consumer._id}
-              firstName={consumer.firstName}
-              lastName={consumer.lastName}
-              phone={consumer.phone}
-              email={consumer.email}
-              status={tracking.status}
-            />
-          </div>
-        ))}
-        <ButtonSquare onClick={handleButtonToAddOrder}>
-          DODAJ NOWE ZAMÓWIENIE
-        </ButtonSquare>
-      </Wrapper>
+      {data.map(({ _id, consumer, products, tracking }) => (
+        <div key={_id}>
+          <OrderList
+            type="order"
+            id={consumer._id}
+            firstName={consumer.firstName}
+            lastName={consumer.lastName}
+            street={consumer.street}
+            code={consumer.code}
+            number={consumer.number}
+            city={consumer.city}
+            phone={consumer.phone}
+            email={consumer.email}
+            status={tracking.status}
+          />
+        </div>
+      ))}
+      <ButtonSquare onClick={handleButtonToAddOrder}>
+        Dodaj nowe zamówienie
+      </ButtonSquare>
     </AppTemplate>
   );
 };

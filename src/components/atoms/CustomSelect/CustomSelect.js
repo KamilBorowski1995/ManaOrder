@@ -21,13 +21,12 @@ const CustomSelect = ({ options, title, onChange, name }) => {
             label: `${firstName} ${lastName} ul.${street} ${number}, ${code} ${city}, tel: ${phone} email: ${email}`,
           })
         );
-        break;
+
       case "product":
         return options.map(({ nameProduct, cost, _id }) => ({
           value: _id,
           label: `${nameProduct}:  ${cost}zł`,
         }));
-        break;
 
       default:
         break;

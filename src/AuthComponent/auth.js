@@ -1,26 +1,26 @@
-class Auth {
-  constructor() {
-    this.authenticated = false;
-  }
+import { veryfToken } from "./fetch";
 
+const Auth = {
+  authenticated: false,
   login(cb) {
-    this.authenticated = true;
+    Auth.authenticated = true;
     sessionStorage.setItem("auth", true);
     cb();
-  }
+  },
 
   logout(cb) {
-    this.authenticated = false;
+    Auth.authenticated = false;
     sessionStorage.clear("auth");
     cb();
-  }
+  },
 
   isAuthenticated() {
+    veryfToken();
     if (sessionStorage.getItem("auth")) {
-      this.authenticated = true;
+      Auth.authenticated = true;
+      return Auth.authenticated;
     }
-    return this.authenticated;
-  }
-}
+  },
+};
 
-export default new Auth();
+export default Auth;

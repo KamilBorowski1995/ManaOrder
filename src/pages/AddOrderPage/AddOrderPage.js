@@ -166,7 +166,7 @@ const AddOrderPage = () => {
           )}
 
           <ButtonSquare onClick={handleClickButton}>
-            Dodaj zamówienie
+            Dodaj nowe zamówienie
           </ButtonSquare>
         </WrapperConsumerData>
         <WrapperNotes>
@@ -179,12 +179,12 @@ const AddOrderPage = () => {
                 options={allProduct}
                 onChange={handleSelectProduct}
               />
-              <ButtonSquare onClick={handleButtonAddProduct}>
+              <ButtonSquare type="edit" onClick={handleButtonAddProduct}>
                 Dodaj
               </ButtonSquare>
             </div>
           ) : (
-            <ButtonSquare onClick={() => setIsOpen(true)}>
+            <ButtonSquare type="edit" onClick={() => setIsOpen(true)}>
               Kolejny produkt
             </ButtonSquare>
           )}

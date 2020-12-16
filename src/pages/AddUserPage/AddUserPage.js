@@ -23,10 +23,6 @@ const WrapperConsumerData = styled.div`
   height: 100%;
 `;
 
-const WrapperNotes = styled.div`
-  position: relative;
-`;
-
 const AddUserPage = () => {
   const history = useHistory();
   const [state, dispatch] = useReducer(addConsumerReducer, { role: "user" });
@@ -45,6 +41,7 @@ const AddUserPage = () => {
       firstName: state.firstName,
       lastName: state.lastName,
       password: state.password,
+      login: state.login,
       role: state.role,
     };
 
@@ -77,6 +74,12 @@ const AddUserPage = () => {
             title="Nazwisko"
             name="lastName"
           />
+          <ElementTable
+            onChange={handleValue}
+            data={state.login}
+            title="Nazwa użytkownika"
+            name="login"
+          />
 
           <ElementTable
             onChange={handleValue}
@@ -92,7 +95,7 @@ const AddUserPage = () => {
             name="role"
           />
           <ButtonSquare onClick={handleClickButton}>
-            Dodaj nowy produkt
+            Dodaj nowego użytkownika
           </ButtonSquare>
         </WrapperConsumerData>
       </Wrapper>

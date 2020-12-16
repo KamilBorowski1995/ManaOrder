@@ -6,23 +6,19 @@ import ButtonSquare from "../../atoms/ButtonSquare/ButtonSquare";
 
 const Wrapper = styled.div`
   border: 1px solid ${theme.colors.primary};
-  display: flex;
+  display: grid;
+  /* grid-template-columns: minmax(250px, max-content) repeat(auto-fit, 360px); */
+  grid-template-columns: repeat(auto-fit, 300px);
   position: relative;
+  padding: 0 30px;
+  min-width: 350px;
 `;
 
 const StyledText = styled.p`
-  /* display: inline-block; */
   color: ${theme.colors.primary};
-  font-size: ${theme.fontSize.l};
+  font-size: ${theme.fontSize.m};
   font-weight: 500;
-  flex-grow: 1;
-  margin: 0;
-  padding: 10px 30px;
-  white-space: nowrap;
-
-  min-width: 260px;
-
-  max-width: 300px;
+  padding: 10px 0px;
   :nth-last-of-type(1) {
     margin-right: 100px;
   }
@@ -60,35 +56,43 @@ const OrderList = ({
 
   return (
     <Wrapper>
-      {type === "order" && <StyledText>{`#${id}`}</StyledText>}
+      {/* {type === "order" && <StyledText>{`#${id}`}</StyledText>} */}
       {type === "product" && <StyledText> {nameProduct}</StyledText>}
       {type === "product" && <StyledText> {`${fixCost(cost)}zł`}</StyledText>}
 
-      {(type === "consumer" || type === "user" || type === "order") && (
+      {(type === "consumer" || type === "user") && (
         <StyledText>
           {firstName} {lastName}
         </StyledText>
       )}
+      {type === "order" && (
+        <StyledText>
+          {firstName} {lastName} <br />
+          ul.{street} {number}, <br />
+          {code} {city}
+        </StyledText>
+      )}
       {type === "user" && <StyledText>{fixPassword(password)}</StyledText>}
       {type === "user" && <StyledText>{role}</StyledText>}
+      {type === "consumer" && (
+        <StyledText>
+          ul.{street} {number}, <br />
+          {code} {city}
+        </StyledText>
+      )}
       {(type === "consumer" || type === "order") && (
         <StyledText>{phone}</StyledText>
       )}
       {(type === "consumer" || type === "order") && (
         <StyledText>{email}</StyledText>
       )}
-      {type === "consumer" && (
+      {type === "order" && (
         <StyledText>
-          ul.{street} {number}, {code} {city}{" "}
+          Status: <br />
+          {status}
         </StyledText>
       )}
-      {type === "order" && <StyledText>{status}</StyledText>}
-
-      {/* <BoxWrapper>
-        <StyledText>{status}</StyledText>
-      </BoxWrapper> */}
-
-      {/* <ButtonSquare>Edytuj</ButtonSquare> */}
+      <ButtonSquare type="edit">Eytuj</ButtonSquare>
     </Wrapper>
   );
 };

@@ -1,11 +1,13 @@
-import React from "react";
+import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
 
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
+import Paragraph from "../../atoms/Paragraph/Paragraph";
 
-import auth from "../../../AuthComponent/auth";
+import Auth from "../../../AuthComponent/auth";
 
 const StyledButtonWrapper = styled.div`
   padding-top: 20px;
@@ -13,20 +15,59 @@ const StyledButtonWrapper = styled.div`
 
 const Form = () => {
   const history = useHistory();
+
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    auth.login(() => history.push("/"));
+    axios
+      .get("http://localhost:5000/api/users/login", {
+        params: {
+          login,
+          password,
+        },
+      })
+      .then(function (response) {
+        console.log(response);
+        Auth.login(() => history.push("/"));
+      })
+      .catch(function (error) {
+        setError(error.response.data);
+        // console.log(response);
+      })
+      .then(function () {
+        // always executed
+      });
+  };
+
+  const handleInput = (e) => {
+    const { type, value } = e.target;
+
+    switch (type) {
+      case "text":
+        setLogin(value);
+        break;
+      case "password":
+        setPassword(value);
+        break;
+
+      default:
+        break;
+    }
   };
 
   return (
     <form onSubmit={handleSubmit}>
-      <Input type="text" value="Login" />
-      <Input type="password" value="Pasword" />
+      <Input type="text" value="Login" onChange={handleInput} />
+      <Input type="password" value="Pasword" onChange={handleInput} />
       <StyledButtonWrapper>
         <Button type="submit" primaryColor="true">
           Zaloguj
         </Button>
       </StyledButtonWrapper>
+      {error.length > 0 && <Paragraph>{error}</Paragraph>}
     </form>
   );
 };

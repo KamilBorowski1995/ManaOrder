@@ -7,6 +7,7 @@ export const theme = {
     tertiary: "#FFFFFF",
   },
   fontSize: {
+    xs: "10px",
     s: "12px",
     m: "14px",
     l: "16px",

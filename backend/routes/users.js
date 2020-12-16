@@ -8,6 +8,7 @@ router.post("/add", async (req, res) => {
     firstName: newConsumer.firstName,
     lastName: newConsumer.lastName,
     password: newConsumer.password,
+    login: newConsumer.login,
     role: newConsumer.role,
   });
 
@@ -23,6 +24,20 @@ router.get("/", async (req, res) => {
   const findUser = await User.find({});
 
   res.send(findUser);
+});
+
+router.get("/login", async (req, res) => {
+  const login = req.query.login;
+  const password = req.query.password;
+
+  const user = await User.findOne({ login: login });
+  if (!user) return res.status(400).send("błąd w logowaniu");
+
+  res.send("zalogowano");
+});
+
+router.get("/veryfToken", async (req, res) => {
+  res.send("elloxd");
 });
 
 module.exports = router;

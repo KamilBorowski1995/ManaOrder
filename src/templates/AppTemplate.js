@@ -19,7 +19,21 @@ const ContentWrapper = styled.div`
 const StyledNavCategory = styled.div``;
 
 const StyledWrapperChildren = styled.div`
-  margin-left: 150px;
+  padding: 0px 30px;
+  max-height: calc(100vh - 200px);
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #061658;
+
+    border-radius: 30px 30px;
+  }
 `;
 
 const MainTemplate = ({ children }) => {

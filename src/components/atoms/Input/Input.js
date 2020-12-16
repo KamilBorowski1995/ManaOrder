@@ -54,10 +54,16 @@ const StyledBar = styled.div`
   background-color: ${theme.colors.primary};
 `;
 
-const Input = ({ value, type, data }) => {
+const Input = ({ value, type, data, onChange }) => {
   return (
     <Wrapper>
-      <StyledInput placeholder=" " name={value} type={type} value={data} />
+      <StyledInput
+        placeholder=" "
+        name={value}
+        type={type}
+        value={data}
+        onChange={onChange}
+      />
       <StyledLabel htmlFor={value}>{value}</StyledLabel>
       <StyledBar></StyledBar>
     </Wrapper>

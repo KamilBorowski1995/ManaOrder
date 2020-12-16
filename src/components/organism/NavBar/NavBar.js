@@ -7,7 +7,7 @@ import Button from "../../atoms/Button/Button";
 
 import { theme } from "../../../theme/mainTheme";
 
-import auth from "../../../AuthComponent/auth";
+import Auth from "../../../AuthComponent/auth";
 
 const NavBarWrapper = styled.div`
   display: grid;
@@ -41,7 +41,7 @@ const NavBar = () => {
 
   const handleClickButton = (e) => {
     if (userIsLogged) {
-      auth.logout(() => history.push("/"));
+      Auth.logout(() => history.push("/"));
     } else {
       history.push("/login");
     }
@@ -52,8 +52,8 @@ const NavBar = () => {
   };
 
   useEffect(() => {
-    setUserIsLogged(auth.isAuthenticated());
-  }, [auth.isAuthenticated()]);
+    setUserIsLogged(Auth.isAuthenticated());
+  }, []);
 
   return (
     <NavBarWrapper>
