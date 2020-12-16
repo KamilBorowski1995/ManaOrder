@@ -20,7 +20,7 @@ const StyledText = styled.p`
   padding: 10px 30px;
   white-space: nowrap;
 
-  min-width: 280px;
+  min-width: 260px;
 
   max-width: 300px;
   :nth-last-of-type(1) {
@@ -60,26 +60,29 @@ const OrderList = ({
 
   return (
     <Wrapper>
-      {/* {type === "product" && <StyledText>{id}</StyledText>} */}
-      {type === "product" && <StyledText>Nazwa : {nameProduct}</StyledText>}
-      {type === "product" && (
-        <StyledText>Cena: {`${fixCost(cost)}zł`}</StyledText>
-      )}
+      {type === "order" && <StyledText>{`#${id}`}</StyledText>}
+      {type === "product" && <StyledText> {nameProduct}</StyledText>}
+      {type === "product" && <StyledText> {`${fixCost(cost)}zł`}</StyledText>}
 
-      {(type === "consumer" || type === "user") && (
+      {(type === "consumer" || type === "user" || type === "order") && (
         <StyledText>
           {firstName} {lastName}
         </StyledText>
       )}
       {type === "user" && <StyledText>{fixPassword(password)}</StyledText>}
       {type === "user" && <StyledText>{role}</StyledText>}
-      {type === "consumer" && <StyledText>{phone}</StyledText>}
-      {type === "consumer" && <StyledText>{email}</StyledText>}
+      {(type === "consumer" || type === "order") && (
+        <StyledText>{phone}</StyledText>
+      )}
+      {(type === "consumer" || type === "order") && (
+        <StyledText>{email}</StyledText>
+      )}
       {type === "consumer" && (
         <StyledText>
           ul.{street} {number}, {code} {city}{" "}
         </StyledText>
       )}
+      {type === "order" && <StyledText>{status}</StyledText>}
 
       {/* <BoxWrapper>
         <StyledText>{status}</StyledText>

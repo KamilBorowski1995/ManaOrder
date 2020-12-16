@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";
+import axios from "axios";
 
 import auth from "../../AuthComponent/auth";
 
@@ -57,22 +58,20 @@ const StyledElementList = styled.div`
 const AppPage = () => {
   const history = useHistory();
 
-  const orderMap = baseOrders.map(
-    ({ id, firstName, lastName, phone, mail, status }) => (
-      <StyledElementList>
-        <OrderList
-          type="consumer"
-          key={id}
-          id={id}
-          firstName={firstName}
-          lastName={lastName}
-          phone={phone}
-          mail={mail}
-          status={status}
-        />
-      </StyledElementList>
-    )
-  );
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/orders")
+      .then((res) => {
+        setData(res.data);
+        console.log(res.data);
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+      .then(function () {});
+  }, []);
 
   const handleButtonToAddOrder = () => {
     console.log("klikam");
@@ -83,7 +82,19 @@ const AppPage = () => {
   return (
     <AppTemplate>
       <Wrapper>
-        {orderMap}
+        {data.map(({ consumer, products, tracking }) => (
+          <div key={consumer._id}>
+            <OrderList
+              type="order"
+              id={consumer._id}
+              firstName={consumer.firstName}
+              lastName={consumer.lastName}
+              phone={consumer.phone}
+              email={consumer.email}
+              status={tracking.status}
+            />
+          </div>
+        ))}
         <ButtonSquare onClick={handleButtonToAddOrder}>
           DODAJ NOWE ZAMÓWIENIE
         </ButtonSquare>

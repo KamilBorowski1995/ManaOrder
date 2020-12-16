@@ -13,6 +13,7 @@ import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect";
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import { selectReducer } from "../../reducers/selectConsumer.reducer";
 import { selectProducts } from "../../reducers/selectProducts.reducer";
+import { selectTracking } from "../../reducers/selectTracking.reducer";
 
 const Wrapper = styled.div`
   display: grid;
@@ -40,6 +41,7 @@ const AddOrderPage = () => {
 
   const [state, dispatch] = useReducer(selectReducer, []);
   const [stateProducts, dispatchProducts] = useReducer(selectProducts, []);
+  const [stateTracking, dispatchTracking] = useReducer(selectTracking, []);
 
   useEffect(() => {
     axios
@@ -55,7 +57,6 @@ const AddOrderPage = () => {
     axios
       .get("http://localhost:5000/api/products")
       .then((res) => {
-        console.log(res.data);
         setAllProduct(res.data);
       })
       .catch(function (error) {
@@ -65,7 +66,7 @@ const AddOrderPage = () => {
   }, []);
 
   const handleValue = (e) =>
-    dispatch({
+    dispatchTracking({
       type: "EDIT_VALUE",
       name: e.target.name,
       value: e.target.value,
@@ -73,28 +74,25 @@ const AddOrderPage = () => {
 
   const handleClickButton = () => {
     console.log(state);
-
-    const newOrder = {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      companyName: state.companyName,
-      NIP: state.NIP,
-      street: state.street,
-      number: state.number,
-      code: state.code,
-      city: state.city,
-      phone: state.phone,
-      email: state.email,
-      notes: state.notes,
-    };
+    console.log(stateProducts);
+    console.log(stateTracking);
+    const data = [
+      { ...state },
+      { ...stateProducts },
+      {
+        courier: stateTracking[0].value,
+        trackingNumber: stateTracking[1].value,
+        status: stateTracking[2].value,
+      },
+    ];
 
     axios
       .post("http://localhost:5000/api/orders/add", {
-        newOrder,
+        data,
       })
       .then(function (response) {
         console.log(response);
-        history.push("/consumers");
+        history.push("/");
       })
       .catch(function (error) {
         console.log(error);
@@ -119,7 +117,6 @@ const AddOrderPage = () => {
     setIsOpen(false);
     dispatchProducts({ type: "SELECT_VALUE", data: activeProduct[0] });
     // setActiveProduct({});
-    console.log(stateProducts);
   };
 
   return (
@@ -147,11 +144,29 @@ const AddOrderPage = () => {
               <InformationElement data={state.NIP} title="NIP:" />
               <InformationElement data={state.phone} title="Numer telefonu:" />
               <InformationElement data={state.email} title="Email:" />
+              <ElementTable
+                onChange={handleValue}
+                data={state.title}
+                title="Firma kurierska"
+                name="courier"
+              />
+              <ElementTable
+                onChange={handleValue}
+                data={state.title}
+                title="Numer przesyłki"
+                name="tracking number"
+              />
+              <ElementTable
+                onChange={handleValue}
+                data={state.title}
+                title="Status"
+                name="status"
+              />
             </div>
           )}
 
           <ButtonSquare onClick={handleClickButton}>
-            Dodaj nowe zamówienie
+            Dodaj zamówienie
           </ButtonSquare>
         </WrapperConsumerData>
         <WrapperNotes>
