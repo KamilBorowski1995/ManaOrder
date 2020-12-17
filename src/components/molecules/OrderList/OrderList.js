@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 
 import { theme } from "../../../theme/mainTheme";
@@ -41,11 +41,18 @@ const OrderList = ({
   nameProduct,
   password,
   role,
+  onClick,
 }) => {
   const fixCost = (cost) => {
     if (cost ^ 0) return parseInt(cost).toFixed(2);
     return cost;
   };
+
+  const [userRole, setUserRole] = useState([]);
+
+  useEffect(() => {
+    setUserRole(sessionStorage.getItem("role"));
+  }, []);
 
   return (
     <Wrapper>
@@ -89,7 +96,11 @@ const OrderList = ({
           {status}
         </StyledText>
       )}
-      <ButtonSquare type="edit">Edytuj</ButtonSquare>
+      {(userRole === "admin" || type === "order") && (
+        <ButtonSquare type="edit" onClick={(e) => onClick(e, id)}>
+          Edytuj
+        </ButtonSquare>
+      )}
     </Wrapper>
   );
 };

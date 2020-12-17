@@ -53,7 +53,6 @@ const AddUserPage = () => {
         },
       })
       .then(function (response) {
-        console.log(response);
         history.push("/users");
       })
       .catch(function (error) {

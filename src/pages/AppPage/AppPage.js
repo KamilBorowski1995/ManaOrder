@@ -26,7 +26,6 @@ const AppPage = () => {
       })
       .then((res) => {
         setData(res.data);
-        console.log(res.data);
       })
       .catch(function (error) {
         Auth.logout(() => history.push("/"));
@@ -39,13 +38,18 @@ const AppPage = () => {
     if (auth.isAuthenticated()) history.push("/orders/add");
   };
 
+  const handleButtonEdit = (e, id) => {
+    // console.log(history.location.pathname);
+    // history.push(`${history.location.pathname}/edit/`);
+    history.push(`orders/edit/${id}`);
+  };
   return (
     <AppTemplate>
       {data.map(({ _id, consumer, products, tracking }) => (
         <div key={_id}>
           <OrderList
             type="order"
-            id={consumer._id}
+            id={_id}
             firstName={consumer.firstName}
             lastName={consumer.lastName}
             street={consumer.street}
@@ -55,6 +59,7 @@ const AppPage = () => {
             phone={consumer.phone}
             email={consumer.email}
             status={tracking.status}
+            onClick={handleButtonEdit}
           />
         </div>
       ))}

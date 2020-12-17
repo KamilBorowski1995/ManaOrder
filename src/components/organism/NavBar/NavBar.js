@@ -72,11 +72,11 @@ const NavBar = () => {
         </StyledLogo>
       </div>
 
-      {userName !== "" && (
-        <StyledUserName>
-          <Paragraph>Witaj {userName}</Paragraph>
-        </StyledUserName>
-      )}
+      <StyledUserName>
+        {userName !== "" && userName !== null && (
+          <Paragraph>Zalogowany użytkownik: {userName}</Paragraph>
+        )}
+      </StyledUserName>
       <NavWrapper>
         <StyledLink to="/">FAQ</StyledLink>
         <StyledLink to="/">Kontakt</StyledLink>

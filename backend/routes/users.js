@@ -55,7 +55,13 @@ router.get("/login", async (req, res) => {
 
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
-  res.header("auth-token", token).send({ token, user: user.firstName });
+  res
+    .header("auth-token", token)
+    .send({
+      token,
+      user: `${user.firstName} ${user.lastName}`,
+      role: user.role,
+    });
 });
 
 router.get("/veryfToken", verify, async (req, res) => {

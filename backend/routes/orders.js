@@ -26,4 +26,9 @@ router.get("/", verify, async (req, res) => {
   res.send(findOrder);
 });
 
+router.get("/order", verify, async (req, res) => {
+  const findOrder = await Order.find({ _id: req.query.orderId });
+  res.send(findOrder);
+});
+
 module.exports = router;

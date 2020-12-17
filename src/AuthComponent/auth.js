@@ -4,6 +4,7 @@ const Auth = {
     Auth.authenticated = true;
     sessionStorage.setItem("auth-token", data.token);
     sessionStorage.setItem("user", data.user);
+    sessionStorage.setItem("role", data.role);
     cb();
   },
 

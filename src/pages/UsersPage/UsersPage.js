@@ -13,6 +13,7 @@ const UsersPage = () => {
   const history = useHistory();
 
   const [data, setData] = useState([]);
+  const [userRole, setUserRole] = useState([]);
 
   useEffect(() => {
     axios
@@ -22,8 +23,8 @@ const UsersPage = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         setData(res.data);
+        setUserRole(sessionStorage.getItem("role"));
       })
       .catch(function (error) {
         Auth.logout(() => history.push("/"));
@@ -49,9 +50,11 @@ const UsersPage = () => {
           />
         </div>
       ))}
-      <ButtonSquare onClick={handleClickButton}>
-        Dodaj nowego użytkownika
-      </ButtonSquare>
+      {userRole === "admin" && (
+        <ButtonSquare onClick={handleClickButton}>
+          Dodaj nowego użytkownika
+        </ButtonSquare>
+      )}
     </AppTemplate>
   );
 };

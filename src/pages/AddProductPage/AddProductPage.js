@@ -38,17 +38,21 @@ const AddProductPage = () => {
     const newConsumer = {
       nameProduct: state.nameProduct,
       cost: state.cost,
-      headers: {
-        "auth-token": sessionStorage.getItem("auth-token"),
-      },
     };
 
     axios
-      .post("http://localhost:5000/api/products/add", {
-        newConsumer,
-      })
+      .post(
+        "http://localhost:5000/api/products/add",
+        {
+          newConsumer,
+        },
+        {
+          headers: {
+            "auth-token": sessionStorage.getItem("auth-token"),
+          },
+        }
+      )
       .then(function (response) {
-        console.log(response);
         history.push("/products");
       })
       .catch(function (error) {

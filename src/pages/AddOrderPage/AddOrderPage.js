@@ -9,6 +9,7 @@ import InformationElement from "../../components/molecules/InformationElement";
 import ElementTable from "../../components/molecules/ElementTable";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect";
+import SelectOrderStatus from "../../components/atoms/Select/SelectOrderStatus";
 
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import { selectReducer } from "../../reducers/selectConsumer.reducer";
@@ -45,7 +46,11 @@ const AddOrderPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/consumers")
+      .get("http://localhost:5000/api/consumers", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setAllConsumer(res.data);
       })
@@ -55,7 +60,11 @@ const AddOrderPage = () => {
       .then(function () {});
 
     axios
-      .get("http://localhost:5000/api/products")
+      .get("http://localhost:5000/api/products", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setAllProduct(res.data);
       })
@@ -73,28 +82,30 @@ const AddOrderPage = () => {
     });
 
   const handleClickButton = () => {
-    console.log(state);
-    console.log(stateProducts);
     console.log(stateTracking);
     const data = [
       { ...state },
-      { ...stateProducts },
+      [...stateProducts],
       {
-        courier: stateTracking[0].value,
-        trackingNumber: stateTracking[1].value,
-        status: stateTracking[2].value,
+        courier: stateTracking.courier,
+        trackingNumber: stateTracking.trackingNumber,
+        status: stateTracking.status,
       },
     ];
 
     axios
-      .post("http://localhost:5000/api/orders/add", {
-        data,
-        headers: {
-          "auth-token": sessionStorage.getItem("auth-token"),
+      .post(
+        "http://localhost:5000/api/orders/add",
+        {
+          data,
         },
-      })
+        {
+          headers: {
+            "auth-token": sessionStorage.getItem("auth-token"),
+          },
+        }
+      )
       .then(function (response) {
-        console.log(response);
         history.push("/");
       })
       .catch(function (error) {
@@ -149,19 +160,19 @@ const AddOrderPage = () => {
               <InformationElement data={state.email} title="Email:" />
               <ElementTable
                 onChange={handleValue}
-                data={state.title}
+                data={state.courier}
                 title="Firma kurierska"
                 name="courier"
               />
               <ElementTable
                 onChange={handleValue}
-                data={state.title}
+                data={state.trackingNumber}
                 title="Numer przesyłki"
-                name="tracking number"
+                name="trackingNumber"
               />
-              <ElementTable
+              <SelectOrderStatus
                 onChange={handleValue}
-                data={state.title}
+                data={state.status}
                 title="Status"
                 name="status"
               />

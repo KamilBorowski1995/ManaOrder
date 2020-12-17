@@ -14,6 +14,7 @@ import AddProductPage from "./pages/AddProductPage";
 import UsersPage from "./pages/UsersPage";
 import AddUserPage from "./pages/AddUserPage";
 import AddOrderPage from "./pages/AddOrderPage";
+import EditOrderPage from "./pages/EditOrderPage";
 
 import ProtectedRoute, { RedirectRoute } from "./AuthComponent/protected.route";
 
@@ -49,6 +50,12 @@ function App() {
         <RedirectRoute exact path="/users" component={UsersPage} />
         <RedirectRoute exact path="/users/add" component={AddUserPage} />
         <RedirectRoute exact path="/orders/add" component={AddOrderPage} />
+
+        <RedirectRoute
+          exact
+          path="/orders/edit/:id"
+          component={EditOrderPage}
+        />
 
         <Route path="*">
           <Redirect to="/" />

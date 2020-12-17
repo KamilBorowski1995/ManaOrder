@@ -55,14 +55,18 @@ const AddConsumerPage = () => {
     };
 
     axios
-      .post("http://localhost:5000/api/consumers/add", {
-        newConsumer,
-        headers: {
-          "auth-token": sessionStorage.getItem("auth-token"),
+      .post(
+        "http://localhost:5000/api/consumers/add",
+        {
+          newConsumer,
         },
-      })
+        {
+          headers: {
+            "auth-token": sessionStorage.getItem("auth-token"),
+          },
+        }
+      )
       .then(function (response) {
-        console.log(response);
         history.push("/consumers");
       })
       .catch(function (error) {

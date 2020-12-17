@@ -35,10 +35,11 @@ const ConsumerDataBase = () => {
   const handleClickButton = () => {
     history.push("consumers/add");
   };
-
+  const handleButtonEdit = () => {
+    console.log(history.location);
+  };
   return (
     <AppTemplate>
-      {console.log(data)}
       {data.map(
         ({
           _id,
@@ -62,6 +63,7 @@ const ConsumerDataBase = () => {
               code={code}
               number={number}
               city={city}
+              onClick={handleButtonEdit}
             />
           </div>
         )
