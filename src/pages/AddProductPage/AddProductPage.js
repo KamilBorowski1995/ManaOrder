@@ -38,6 +38,9 @@ const AddProductPage = () => {
     const newConsumer = {
       nameProduct: state.nameProduct,
       cost: state.cost,
+      headers: {
+        "auth-token": sessionStorage.getItem("auth-token"),
+      },
     };
 
     axios

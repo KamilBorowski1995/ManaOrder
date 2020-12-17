@@ -3,8 +3,9 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
 const User = require("../model/user.schema");
+const verify = require("../function/verifyToken");
 
-router.post("/add", async (req, res) => {
+router.post("/add", verify, async (req, res) => {
   const newConsumer = req.body.newUsers;
 
   const exitLogin = await User.findOne({ login: newConsumer.login });
@@ -29,10 +30,15 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", verify, async (req, res) => {
   const findUser = await User.find({});
-
-  res.send(findUser);
+  const newArrow = findUser.map(({ _id, firstName, lastName, role }) => ({
+    _id,
+    firstName,
+    lastName,
+    role,
+  }));
+  res.send(newArrow);
 });
 
 router.get("/login", async (req, res) => {
@@ -52,8 +58,9 @@ router.get("/login", async (req, res) => {
   res.header("auth-token", token).send({ token, user: user.firstName });
 });
 
-router.get("/veryfToken", async (req, res) => {
-  res.send("elloxd");
+router.get("/veryfToken", verify, async (req, res) => {
+  // console.log(req.user);
+  res.send(req.user);
 });
 
 module.exports = router;

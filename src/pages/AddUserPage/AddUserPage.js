@@ -48,6 +48,9 @@ const AddUserPage = () => {
     axios
       .post("http://localhost:5000/api/users/add", {
         newUsers,
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
       })
       .then(function (response) {
         console.log(response);

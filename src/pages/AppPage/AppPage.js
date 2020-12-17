@@ -10,6 +10,7 @@ import AppTemplate from "../../templates/AppTemplate";
 import OrderList from "../../components/molecules/OrderList/OrderList";
 
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
+import Auth from "../../AuthComponent/auth";
 
 const AppPage = () => {
   const history = useHistory();
@@ -18,19 +19,23 @@ const AppPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/orders")
+      .get("http://localhost:5000/api/orders", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setData(res.data);
         console.log(res.data);
       })
       .catch(function (error) {
+        Auth.logout(() => history.push("/"));
         console.log(error);
       })
       .then(function () {});
   }, []);
 
   const handleButtonToAddOrder = () => {
-    console.log(auth.isAuthenticated());
     if (auth.isAuthenticated()) history.push("/orders/add");
   };
 

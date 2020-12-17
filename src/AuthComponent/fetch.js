@@ -1,13 +1,17 @@
 import axios from "axios";
 
-export const veryfToken = (localToken) => {
+export const veryfToken = (token, cb, ext) => {
   axios
-    .get("http://localhost:5000/api/users/veryfToken")
+    .get("http://localhost:5000/api/users/veryfToken", {
+      headers: {
+        "auth-token": token,
+      },
+    })
     .then((res) => {
-      console.log(res);
+      if (res.status === 200) return cb();
     })
     .catch(function (error) {
-      console.log(error);
+      return ext();
     })
     .then(function () {});
 };

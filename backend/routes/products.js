@@ -1,8 +1,9 @@
 const router = require("express").Router();
 
 const Product = require("../model/product.schema");
+const verify = require("../function/verifyToken");
 
-router.post("/add", async (req, res) => {
+router.post("/add", verify, async (req, res) => {
   const newConsumer = req.body.newConsumer;
   const product = new Product({
     nameProduct: newConsumer.nameProduct,
@@ -17,7 +18,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", verify, async (req, res) => {
   const findProduct = await Product.find({});
 
   res.send(findProduct);

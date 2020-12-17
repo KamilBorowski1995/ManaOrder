@@ -1,8 +1,9 @@
 const router = require("express").Router();
 
 const Consumer = require("../model/consumer.schema");
+const verify = require("../function/verifyToken");
 
-router.post("/add", async (req, res) => {
+router.post("/add", verify, async (req, res) => {
   const newConsumer = req.body.newConsumer;
   const consumer = new Consumer({
     firstName: newConsumer.firstName,
@@ -26,7 +27,7 @@ router.post("/add", async (req, res) => {
   }
 });
 
-router.get("/", async (req, res) => {
+router.get("/", verify, async (req, res) => {
   const findConsumer = await Consumer.find({});
 
   res.send(findConsumer);

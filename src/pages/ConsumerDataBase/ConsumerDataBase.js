@@ -8,6 +8,7 @@ import AppTemplate from "../../templates/AppTemplate";
 import OrderList from "../../components/molecules/OrderList/OrderList";
 
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
+import Auth from "../../AuthComponent/auth";
 
 const ConsumerDataBase = () => {
   const history = useHistory();
@@ -16,11 +17,16 @@ const ConsumerDataBase = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/consumers")
+      .get("http://localhost:5000/api/consumers", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         setData(res.data);
       })
       .catch(function (error) {
+        Auth.logout(() => history.push("/"));
         console.log(error);
       })
       .then(function () {});

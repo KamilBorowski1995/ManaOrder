@@ -1,5 +1,9 @@
-import React from "react";
+import React, { useEffect } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import axios from "axios";
+
+import Auth from "../AuthComponent/auth";
 
 import NavBar from "../components/organism/NavBar";
 import NavCategory from "../components/organism/NavCategory";
@@ -37,6 +41,23 @@ const StyledWrapperChildren = styled.div`
 `;
 
 const MainTemplate = ({ children }) => {
+  const history = useHistory();
+
+  useEffect(() => {
+    axios
+      .get("http://localhost:5000/api/users/veryfToken", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
+      .then((res) => {})
+      .catch(function (error) {
+        Auth.logout(() => history.push("/"));
+        console.log(error);
+      })
+      .then(function () {});
+  }, []);
+
   return (
     <Wrapper>
       <NavBar />

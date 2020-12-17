@@ -30,9 +30,8 @@ const Form = () => {
         Auth.login(() => history.push("/"), response.data);
       })
       .catch(function (error) {
-        console.log(error);
-
-        // console.log(response);
+        if (error.response) setError(error.response.data);
+        else console.log(error);
       })
       .then(function (e) {
         // always executed

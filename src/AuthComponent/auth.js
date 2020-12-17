@@ -1,5 +1,3 @@
-import { veryfToken } from "./fetch";
-
 const Auth = {
   authenticated: false,
   login(cb, data) {
@@ -16,13 +14,10 @@ const Auth = {
     cb();
   },
 
-  isAuthenticated(data) {
-    const localToken = sessionStorage.getItem("auth-token");
-    if (localToken) {
-      veryfToken(localToken);
-      Auth.authenticated = true;
-      return Auth.authenticated;
-    }
+  isAuthenticated() {
+    const token = sessionStorage.getItem("auth-token");
+    if (token) Auth.authenticated = true;
+    return Auth.authenticated;
   },
 };
 

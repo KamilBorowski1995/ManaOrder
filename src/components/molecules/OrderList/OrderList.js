@@ -47,14 +47,6 @@ const OrderList = ({
     return cost;
   };
 
-  const fixPassword = (password) => {
-    let hashPass = "";
-    for (let i = 0; i < password.length; i++) {
-      hashPass = hashPass + "*";
-    }
-    return hashPass;
-  };
-
   return (
     <Wrapper>
       {/* {type === "order" && <StyledText>{`#${id}`}</StyledText>} */}
@@ -73,7 +65,6 @@ const OrderList = ({
           {code} {city}
         </StyledText>
       )}
-      {/* {type === "user" && <StyledText>{fixPassword(password)}</StyledText>} */}
       {type === "user" && <StyledText>{role}</StyledText>}
       {type === "consumer" && (
         <StyledText>

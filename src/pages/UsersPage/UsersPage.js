@@ -7,6 +7,7 @@ import AppTemplate from "../../templates/AppTemplate";
 import OrderList from "../../components/molecules/OrderList/OrderList";
 
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
+import Auth from "../../AuthComponent/auth";
 
 const UsersPage = () => {
   const history = useHistory();
@@ -15,12 +16,17 @@ const UsersPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users")
+      .get("http://localhost:5000/api/users", {
+        headers: {
+          "auth-token": sessionStorage.getItem("auth-token"),
+        },
+      })
       .then((res) => {
         console.log(res.data);
         setData(res.data);
       })
       .catch(function (error) {
+        Auth.logout(() => history.push("/"));
         console.log(error);
       })
       .then(function () {});
@@ -32,14 +38,13 @@ const UsersPage = () => {
 
   return (
     <AppTemplate>
-      {data.map(({ _id, firstName, lastName, password, role }) => (
+      {data.map(({ _id, firstName, lastName, role }) => (
         <div key={_id}>
           <OrderList
             type="user"
             id={_id}
             firstName={firstName}
             lastName={lastName}
-            password={password}
             role={role}
           />
         </div>
