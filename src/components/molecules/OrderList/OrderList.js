@@ -73,7 +73,7 @@ const OrderList = ({
           {code} {city}
         </StyledText>
       )}
-      {type === "user" && <StyledText>{fixPassword(password)}</StyledText>}
+      {/* {type === "user" && <StyledText>{fixPassword(password)}</StyledText>} */}
       {type === "user" && <StyledText>{role}</StyledText>}
       {type === "consumer" && (
         <StyledText>
@@ -98,7 +98,7 @@ const OrderList = ({
           {status}
         </StyledText>
       )}
-      <ButtonSquare type="edit">Eytuj</ButtonSquare>
+      <ButtonSquare type="edit">Edytuj</ButtonSquare>
     </Wrapper>
   );
 };

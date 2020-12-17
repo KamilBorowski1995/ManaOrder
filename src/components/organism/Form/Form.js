@@ -27,12 +27,11 @@ const Form = () => {
         params: { login, password },
       })
       .then(function (response) {
-        console.log(response);
-        console.log(response.headers);
         Auth.login(() => history.push("/"), response.data);
       })
       .catch(function (error) {
-        setError(error.response.data);
+        console.log(error);
+
         // console.log(response);
       })
       .then(function (e) {

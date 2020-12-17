@@ -14,6 +14,7 @@ const NavBarWrapper = styled.div`
   display: grid;
   grid-template-columns: max-content 4fr 1fr;
   margin-bottom: 20px;
+  align-items: center;
 `;
 const NavWrapper = styled.nav`
   display: flex;
@@ -22,7 +23,8 @@ const NavWrapper = styled.nav`
 `;
 
 const StyledUserName = styled.div`
-  margin-left: 30px;
+  padding-left: 80px;
+  padding-right: 20px;
 `;
 
 const StyledLink = styled(Link)`
@@ -72,7 +74,6 @@ const NavBar = () => {
 
       {userName !== "" && (
         <StyledUserName>
-          {" "}
           <Paragraph>Witaj {userName}</Paragraph>
         </StyledUserName>
       )}

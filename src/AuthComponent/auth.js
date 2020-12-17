@@ -12,6 +12,7 @@ const Auth = {
   logout(cb) {
     Auth.authenticated = false;
     sessionStorage.clear("auth-token");
+    sessionStorage.clear("user");
     cb();
   },
 

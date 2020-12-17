@@ -25,9 +25,7 @@ const Wrapper = styled.div`
 
 function App() {
   return (
-    // Poprawić routingi aby przy wejściu na zakzaną stronę nie tylko renderowało stronę główną ale takze zmieniało adress w przeglądarce. Może redirect?
     // Dodać chat wewnętrzny dla pracowników
-    // Poprawić nawigacnę główną. Klikalne całe
 
     <BrowserRouter>
       <Wrapper>
