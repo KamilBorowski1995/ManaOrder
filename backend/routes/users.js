@@ -15,8 +15,7 @@ router.post("/add", verify, async (req, res) => {
   const hashPassword = await bcrypt.hash(newConsumer.password, salt);
 
   const user = new User({
-    firstName: newConsumer.firstName,
-    lastName: newConsumer.lastName,
+    fullName: newConsumer.fullName,
     password: hashPassword,
     login: newConsumer.login,
     role: newConsumer.role,
@@ -32,10 +31,9 @@ router.post("/add", verify, async (req, res) => {
 
 router.get("/", verify, async (req, res) => {
   const findUser = await User.find({});
-  const newArrow = findUser.map(({ _id, firstName, lastName, role }) => ({
+  const newArrow = findUser.map(({ _id, fullName, role }) => ({
     _id,
-    firstName,
-    lastName,
+    fullName,
     role,
   }));
   res.send(newArrow);
@@ -55,13 +53,11 @@ router.get("/login", async (req, res) => {
 
   const token = jwt.sign({ _id: user._id }, process.env.TOKEN_SECRET);
 
-  res
-    .header("auth-token", token)
-    .send({
-      token,
-      user: `${user.firstName} ${user.lastName}`,
-      role: user.role,
-    });
+  res.header("auth-token", token).send({
+    token,
+    user: user.fullName,
+    role: user.role,
+  });
 });
 
 router.get("/veryfToken", verify, async (req, res) => {

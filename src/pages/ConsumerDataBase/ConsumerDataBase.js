@@ -30,7 +30,7 @@ const ConsumerDataBase = () => {
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history]);
 
   const handleClickButton = () => {
     history.push("consumers/add");
@@ -41,22 +41,11 @@ const ConsumerDataBase = () => {
   return (
     <AppTemplate>
       {data.map(
-        ({
-          _id,
-          firstName,
-          lastName,
-          phone,
-          email,
-          street,
-          code,
-          number,
-          city,
-        }) => (
+        ({ _id, fullName, phone, email, street, code, number, city }) => (
           <div key={_id}>
             <OrderList
               type="consumer"
-              firstName={firstName}
-              lastName={lastName}
+              fullName={fullName}
               phone={phone}
               email={email}
               street={street}

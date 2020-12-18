@@ -30,7 +30,7 @@ const ProductsPage = () => {
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history]);
 
   const handleClickButton = () => {
     history.push("/products/add");

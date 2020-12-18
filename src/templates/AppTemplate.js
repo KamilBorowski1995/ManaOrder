@@ -56,7 +56,7 @@ const MainTemplate = ({ children }) => {
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history]);
 
   return (
     <Wrapper>

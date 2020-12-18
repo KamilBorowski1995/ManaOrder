@@ -31,7 +31,7 @@ const UsersPage = () => {
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history]);
 
   const handleClickButton = () => {
     history.push("/users/add");
@@ -39,15 +39,9 @@ const UsersPage = () => {
 
   return (
     <AppTemplate>
-      {data.map(({ _id, firstName, lastName, role }) => (
+      {data.map(({ _id, fullName, role }) => (
         <div key={_id}>
-          <OrderList
-            type="user"
-            id={_id}
-            firstName={firstName}
-            lastName={lastName}
-            role={role}
-          />
+          <OrderList type="user" id={_id} fullName={fullName} role={role} />
         </div>
       ))}
       {userRole === "admin" && (

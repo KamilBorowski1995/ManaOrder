@@ -1,19 +1,7 @@
 const mongoose = require("mongoose");
 
 const consumerSchema = new mongoose.Schema({
-  firstName: {
-    type: String,
-    required: true,
-  },
-  lastName: {
-    type: String,
-    required: true,
-  },
-  companyName: {
-    type: String,
-    required: true,
-  },
-  NIP: {
+  fullName: {
     type: String,
     required: true,
   },
@@ -22,7 +10,7 @@ const consumerSchema = new mongoose.Schema({
     required: true,
   },
   number: {
-    type: String,
+    type: Number,
     required: true,
   },
   code: {
@@ -43,6 +31,10 @@ const consumerSchema = new mongoose.Schema({
   },
   notes: {
     type: String,
+  },
+  consumerType: {
+    type: String,
+    required: true,
   },
 });
 

@@ -1,4 +1,4 @@
-import React, { useReducer } from "react";
+import React, { useReducer, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
@@ -29,6 +29,7 @@ const WrapperNotes = styled.div`
 const AddConsumerPage = () => {
   const history = useHistory();
   const [state, dispatch] = useReducer(addConsumerReducer, {});
+  const [selectConsumerType, setSelectConsumerType] = useState("Firma");
 
   const handleValue = (e) =>
     dispatch({
@@ -41,10 +42,7 @@ const AddConsumerPage = () => {
     console.log(state);
 
     const newConsumer = {
-      firstName: state.firstName,
-      lastName: state.lastName,
-      companyName: state.companyName,
-      NIP: state.NIP,
+      fullName: state.fullName,
       street: state.street,
       number: state.number,
       code: state.code,
@@ -52,6 +50,7 @@ const AddConsumerPage = () => {
       phone: state.phone,
       email: state.email,
       notes: state.notes,
+      consumerType: selectConsumerType,
     };
 
     axios
@@ -73,33 +72,43 @@ const AddConsumerPage = () => {
         console.log(error);
       });
   };
+
+  const handleRadioInput = (e) => {
+    setSelectConsumerType(e.target.value);
+  };
   return (
     <AppTemplate>
       <Wrapper>
         <WrapperConsumerData>
+          <div>
+            <label>
+              <input
+                type="radio"
+                checked={selectConsumerType === "Firma"}
+                name="consumerType"
+                value="Firma"
+                onChange={handleRadioInput}
+              />
+              Firma
+            </label>
+            <label>
+              <input
+                type="radio"
+                name="consumerType"
+                value="Osoba fizyczna"
+                checked={selectConsumerType === "Osoba fizyczna"}
+                onChange={handleRadioInput}
+              />
+              Osoba fizyczna
+            </label>
+          </div>
           <ElementTable
             onChange={handleValue}
             data={state.firstName}
-            title="Imię"
-            name="firstName"
-          />
-          <ElementTable
-            onChange={handleValue}
-            data={state.lastName}
-            title="Nazwisko"
-            name="lastName"
-          />
-          <ElementTable
-            onChange={handleValue}
-            data={state.companyName}
-            title="Pełna nazwa firmy"
-            name="companyName"
-          />
-          <ElementTable
-            onChange={handleValue}
-            data={state.NIP}
-            title="NIP"
-            name="NIP"
+            title={
+              selectConsumerType === "Firma" ? "Nazwa firmy" : "Imię i nazwisko"
+            }
+            name="fullName"
           />
           <ElementTable
             onChange={handleValue}

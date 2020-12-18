@@ -32,7 +32,7 @@ const AppPage = () => {
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history]);
 
   const handleButtonToAddOrder = () => {
     if (auth.isAuthenticated()) history.push("/orders/add");

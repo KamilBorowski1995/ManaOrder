@@ -28,8 +28,7 @@ const StyledText = styled.p`
 const OrderList = ({
   type,
   id,
-  firstName,
-  lastName,
+  fullName,
   phone,
   email,
   status,
@@ -61,13 +60,11 @@ const OrderList = ({
       {type === "product" && <StyledText> {`${fixCost(cost)}zł`}</StyledText>}
 
       {(type === "consumer" || type === "user") && (
-        <StyledText>
-          {firstName} {lastName}
-        </StyledText>
+        <StyledText>{fullName}</StyledText>
       )}
       {type === "order" && (
         <StyledText>
-          {firstName} {lastName} <br />
+          {fullName} <br />
           ul.{street} {number}, <br />
           {code} {city}
         </StyledText>

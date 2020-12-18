@@ -6,10 +6,7 @@ const verify = require("../function/verifyToken");
 router.post("/add", verify, async (req, res) => {
   const newConsumer = req.body.newConsumer;
   const consumer = new Consumer({
-    firstName: newConsumer.firstName,
-    lastName: newConsumer.lastName,
-    companyName: newConsumer.companyName,
-    NIP: newConsumer.NIP,
+    fullName: newConsumer.fullName,
     street: newConsumer.street,
     number: newConsumer.number,
     code: newConsumer.code,
@@ -17,6 +14,7 @@ router.post("/add", verify, async (req, res) => {
     phone: newConsumer.phone,
     email: newConsumer.email,
     notes: newConsumer.notes,
+    consumerType: newConsumer.consumerType,
   });
 
   try {
