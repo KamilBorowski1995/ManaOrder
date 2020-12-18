@@ -10,6 +10,8 @@ import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 
 import { addProductsReducer } from "../../reducers/addProducts.reducer";
 
+import { config } from "../../config";
+
 const Wrapper = styled.div`
   display: grid;
 
@@ -42,7 +44,7 @@ const AddProductPage = () => {
 
     axios
       .post(
-        "http://localhost:5000/api/products/add",
+        `${config.server}/api/products/add`,
         {
           newConsumer,
         },

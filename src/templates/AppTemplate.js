@@ -8,6 +8,8 @@ import Auth from "../AuthComponent/auth";
 import NavBar from "../components/organism/NavBar";
 import NavCategory from "../components/organism/NavCategory";
 
+import { config } from "../config";
+
 const Wrapper = styled.div`
   max-width: 1920px;
   margin: 0 auto;
@@ -49,7 +51,7 @@ const MainTemplate = ({ children }) => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users/veryfToken", {
+      .get(`${config.server}/api/users/veryfToken`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },

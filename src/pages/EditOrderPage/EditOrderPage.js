@@ -15,6 +15,8 @@ import Select from "../../components/atoms/Select/Select";
 import Auth from "../../AuthComponent/auth";
 import OrderFullList from "../../components/organism/OrderFullList/OrderFullList";
 
+import { config } from "../../config";
+
 const Wrapper = styled.div`
   display: grid;
 
@@ -42,7 +44,7 @@ const EditOrderPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/orders/order", {
+      .get(`${config.server}/api/orders/order`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },
@@ -84,7 +86,7 @@ const EditOrderPage = () => {
 
     axios
       .put(
-        `http://localhost:5000/api/orders/${params.id}`,
+        `${config.server}/api/orders/${params.id}`,
         {
           tracking,
         },

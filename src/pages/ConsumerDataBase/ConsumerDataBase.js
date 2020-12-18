@@ -10,6 +10,8 @@ import OrderList from "../../components/molecules/OrderList/OrderList";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import Auth from "../../AuthComponent/auth";
 
+import { config } from "../../config";
+
 const ConsumerDataBase = () => {
   const history = useHistory();
 
@@ -17,7 +19,7 @@ const ConsumerDataBase = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/consumers", {
+      .get(`${config.server}/api/consumers`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },

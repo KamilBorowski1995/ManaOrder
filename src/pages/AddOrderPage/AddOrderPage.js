@@ -17,6 +17,8 @@ import { selectTracking } from "../../reducers/selectTracking.reducer";
 import Select from "../../components/atoms/Select/Select";
 import OrderFullList from "../../components/organism/OrderFullList/OrderFullList";
 
+import { config } from "../../config";
+
 const Wrapper = styled.div`
   display: grid;
 
@@ -47,7 +49,7 @@ const AddOrderPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/consumers", {
+      .get(`${config.server}/api/consumers`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },
@@ -61,7 +63,7 @@ const AddOrderPage = () => {
       .then(function () {});
 
     axios
-      .get("http://localhost:5000/api/products", {
+      .get(`${config.server}/api/products`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },
@@ -98,7 +100,7 @@ const AddOrderPage = () => {
     console.log(data);
     axios
       .post(
-        "http://localhost:5000/api/orders/add",
+        `${config.server}/api/orders/add`,
         {
           data,
         },

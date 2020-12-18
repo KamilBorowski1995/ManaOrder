@@ -11,6 +11,8 @@ import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import { addConsumerReducer } from "../../reducers/addConsumer.reducer";
 import InputRadio from "../../components/atoms/Input/InputRadio";
 
+import { config } from "../../config";
+
 const Wrapper = styled.div`
   display: grid;
 
@@ -66,7 +68,7 @@ const AddConsumerPage = () => {
 
     axios
       .post(
-        "http://localhost:5000/api/consumers/add",
+        `${config.server}/api/consumers/add`,
         {
           newConsumer,
         },

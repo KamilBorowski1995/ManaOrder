@@ -11,6 +11,8 @@ import Select from "../../components/atoms/Select/Select";
 
 import { addConsumerReducer } from "../../reducers/addConsumer.reducer";
 
+import { config } from "../../config";
+
 const Wrapper = styled.div`
   display: grid;
 
@@ -44,7 +46,7 @@ const AddUserPage = () => {
 
     axios
       .post(
-        "http://localhost:5000/api/users/add",
+        `${config.server}/api/users/add`,
         {
           newUsers,
         },

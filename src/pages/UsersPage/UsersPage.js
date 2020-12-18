@@ -9,6 +9,8 @@ import OrderList from "../../components/molecules/OrderList/OrderList";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import Auth from "../../AuthComponent/auth";
 
+import { config } from "../../config";
+
 const UsersPage = () => {
   const history = useHistory();
 
@@ -17,7 +19,7 @@ const UsersPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/users", {
+      .get(`${config.server}/api/users`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },

@@ -1,8 +1,9 @@
 import axios from "axios";
+import { config } from "../config";
 
 export const veryfToken = (token, cb, ext) => {
   axios
-    .get("http://localhost:5000/api/users/veryfToken", {
+    .get(`${config.server}/api/users/veryfToken`, {
       headers: {
         "auth-token": token,
       },

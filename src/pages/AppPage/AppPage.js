@@ -12,6 +12,8 @@ import InputRadio from "../../components/atoms/Input/InputRadio";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import Auth from "../../AuthComponent/auth";
 
+import { config } from "../../config";
+
 const WrapperInputRadio = styled.div`
   display: grid;
   grid-template-columns: repeat(3, minmax(auto, 200px));
@@ -31,7 +33,7 @@ const AppPage = () => {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/orders", {
+      .get(`${config.server}/api/orders`, {
         headers: {
           "auth-token": sessionStorage.getItem("auth-token"),
         },

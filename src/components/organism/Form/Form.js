@@ -3,6 +3,8 @@ import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
+import { config } from "../../../config";
+
 import Input from "../../atoms/Input/Input";
 import Button from "../../atoms/Button/Button";
 import Paragraph from "../../atoms/Paragraph/Paragraph";
@@ -30,7 +32,7 @@ const Form = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     axios
-      .get("https://manaorder.herokuapp.com/api/users/login", {
+      .get(`${config.server}/api/users/login`, {
         params: { login, password },
       })
       .then(function (response) {
