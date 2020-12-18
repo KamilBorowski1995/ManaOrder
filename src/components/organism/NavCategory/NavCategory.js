@@ -11,7 +11,15 @@ import userImage from "../../assets/svg/user.svg";
 
 import Paragraph from "../../atoms/Paragraph/Paragraph";
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  flex-direction: column;
+  @media (max-width: 1040px) {
+    flex-direction: row;
+    width: calc(100vw - 40px);
+    justify-content: space-between;
+  }
+`;
 
 const activeClassName = "nav-item-active";
 
@@ -38,24 +46,30 @@ const StyledImg = styled.img`
   transition: 0.3s ease-in-out;
 `;
 
+const StyledParagraph = styled(Paragraph)`
+  @media (max-width: 1040px) {
+    font-size: ${theme.fontSize.l};
+  }
+`;
+
 const NavCategory = () => {
   return (
     <Wrapper>
       <StyledNavLink exact to="/">
         <StyledImg src={boxImage} alt="orders" />
-        <Paragraph size="xl">Zamówienia</Paragraph>
+        <StyledParagraph size="xl">Zamówienia</StyledParagraph>
       </StyledNavLink>
       <StyledNavLink to="/consumers">
         <StyledImg src={clientImage} alt="clients" />
-        <Paragraph size="xl">Baza klientów</Paragraph>
+        <StyledParagraph size="xl">Baza klientów</StyledParagraph>
       </StyledNavLink>
       <StyledNavLink to="/products">
         <StyledImg src={openBoxImage} alt="products" />
-        <Paragraph size="xl">Produkty</Paragraph>
+        <StyledParagraph size="xl">Produkty</StyledParagraph>
       </StyledNavLink>
       <StyledNavLink to="/users">
         <StyledImg src={userImage} alt="users" />
-        <Paragraph size="xl">Użytkownicy</Paragraph>
+        <StyledParagraph size="xl">Użytkownicy</StyledParagraph>
       </StyledNavLink>
     </Wrapper>
   );

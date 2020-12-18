@@ -2,7 +2,6 @@ const router = require("express").Router();
 
 const Order = require("../model/order.schema");
 const verify = require("../function/verifyToken");
-const { findOne } = require("../model/order.schema");
 
 router.post("/add", verify, async (req, res) => {
   const newOrderConsumer = req.body.data[0];

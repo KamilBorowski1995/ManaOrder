@@ -18,6 +18,10 @@ const Wrapper = styled.div`
 const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 230px auto;
+  @media (max-width: 1040px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const StyledNavCategory = styled.div``;

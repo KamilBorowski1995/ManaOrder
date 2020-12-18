@@ -9,8 +9,15 @@ import Paragraph from "../../atoms/Paragraph/Paragraph";
 
 import Auth from "../../../AuthComponent/auth";
 
-const StyledButtonWrapper = styled.div`
-  padding-top: 20px;
+const StyledButton = styled(Button)`
+  margin-top: 20px;
+`;
+
+const StyledForm = styled.form`
+  @media (max-width: 1150px) {
+    text-align: center;
+    width: calc(100vw- 40px);
+  }
 `;
 
 const Form = () => {
@@ -55,16 +62,16 @@ const Form = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <StyledForm onSubmit={handleSubmit}>
       <Input type="text" value="Login" onChange={handleInput} />
       <Input type="password" value="Pasword" onChange={handleInput} />
-      <StyledButtonWrapper>
-        <Button type="submit" primaryColor="true">
-          Zaloguj
-        </Button>
-      </StyledButtonWrapper>
+
+      <StyledButton type="submit" primaryColor="true">
+        Zaloguj
+      </StyledButton>
+
       {error.length > 0 && <Paragraph>{error}</Paragraph>}
-    </form>
+    </StyledForm>
   );
 };
 

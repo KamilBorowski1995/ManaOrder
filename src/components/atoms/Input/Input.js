@@ -12,6 +12,10 @@ const Wrapper = styled.div`
   font-size: ${theme.fontSize.l};
   color: ${theme.colors.primaryColor};
   border: none;
+
+  @media (max-width: 1150px) {
+    width: calc(100vw - 40px);
+  }
 `;
 
 const StyledInput = styled.input`

@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 const User = require("../model/user.schema");
 const verify = require("../function/verifyToken");
 
-router.post("/add", verify, async (req, res) => {
+router.post("/add", async (req, res) => {
   const newConsumer = req.body.newUsers;
 
   const exitLogin = await User.findOne({ login: newConsumer.login });

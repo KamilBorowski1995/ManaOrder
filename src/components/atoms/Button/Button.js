@@ -35,15 +35,23 @@ const StyledButtonLogout = styled(ButtonBase)`
   padding: 0 20px;
 `;
 
-const Button = ({ children, primaryColor, onClick, logout }) => {
+const Button = ({ children, primaryColor, onClick, logout, className }) => {
   return (
     <div>
       {logout ? (
-        <StyledButtonLogout onClick={onClick} primaryColor={primaryColor}>
+        <StyledButtonLogout
+          className={className}
+          onClick={onClick}
+          primaryColor={primaryColor}
+        >
           {children}
         </StyledButtonLogout>
       ) : (
-        <StyledButton onClick={onClick} primaryColor={primaryColor}>
+        <StyledButton
+          className={className}
+          onClick={onClick}
+          primaryColor={primaryColor}
+        >
           {children}
         </StyledButton>
       )}

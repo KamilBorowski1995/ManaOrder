@@ -12,13 +12,16 @@ import Auth from "../../../AuthComponent/auth";
 
 const NavBarWrapper = styled.div`
   display: grid;
-  grid-template-columns: max-content 4fr 1fr;
+  grid-template-columns: max-content 4fr max-content;
   margin-bottom: 20px;
   align-items: center;
+  @media (max-width: 1150px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 const NavWrapper = styled.nav`
   display: flex;
-  /* justify-content: space-between; */
   align-items: center;
 `;
 
@@ -27,18 +30,18 @@ const StyledUserName = styled.div`
   padding-right: 20px;
 `;
 
-const StyledLink = styled(Link)`
-  color: ${theme.colors.primary};
-  text-decoration: none;
-  transition: 0.3s ease-in-out;
-  padding-right: 50px;
-  :hover {
-    opacity: 0.8;
-  }
-`;
 const StyledLogo = styled(Link)`
   display: flex;
   align-items: center;
+  @media (max-width: 1150px) {
+    margin-top: 20px;
+  }
+`;
+
+const StyledButton = styled(Button)`
+  @media (max-width: 1150px) {
+    display: none;
+  }
 `;
 
 const NavBar = () => {
@@ -78,11 +81,11 @@ const NavBar = () => {
         )}
       </StyledUserName>
       <NavWrapper>
-        <StyledLink to="/">FAQ</StyledLink>
-        <StyledLink to="/">Kontakt</StyledLink>
-        <Button logout={userIsLogged} onClick={handleClickButton}>
+        {/* <StyledLink to="/">FAQ</StyledLink>
+        <StyledLink to="/">Kontakt</StyledLink> */}
+        <StyledButton logout={userIsLogged} onClick={handleClickButton}>
           {userIsLogged ? "Wyloguj" : "Zaloguj się"}
-        </Button>
+        </StyledButton>
       </NavWrapper>
     </NavBarWrapper>
   );
