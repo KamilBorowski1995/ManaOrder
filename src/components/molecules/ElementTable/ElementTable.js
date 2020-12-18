@@ -35,18 +35,46 @@ const Input = styled.input`
   }
 `;
 
-const ElementTable = ({ size, data, title, onChange, name }) => {
+const TextArea = styled.textarea`
+  background-color: transparent;
+  padding: 10px;
+  width: 80%;
+  height: 200px;
+  font-weight: 500;
+  font-size: ${theme.fontSize.l};
+  color: ${theme.colors.primary};
+  font-family: ${theme.primaryFont};
+  border: 1px solid ${theme.colors.primary};
+  cursor: pointer;
+  :focus {
+    outline: none;
+  }
+`;
+
+const ElementTable = ({
+  size,
+  data,
+  title,
+  onChange,
+  name,
+  type = "input",
+}) => {
   const inputPlaceholder = !data && "Edytuj";
 
   return (
     <Wrapper>
       <StyledParagraph>{title}:</StyledParagraph>
-      <Input
-        name={name}
-        value={data}
-        onChange={onChange}
-        placeholder={inputPlaceholder}
-      />
+      {type === "input" && (
+        <Input
+          name={name}
+          value={data}
+          onChange={onChange}
+          placeholder={inputPlaceholder}
+        />
+      )}
+      {type === "textarea" && (
+        <TextArea name={name} value={data} onChange={onChange} />
+      )}
     </Wrapper>
   );
 };

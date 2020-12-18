@@ -36,6 +36,10 @@ const ProductsPage = () => {
     history.push("/products/add");
   };
 
+  const handleButtonEdit = () => {
+    console.log(history.location);
+  };
+
   return (
     <AppTemplate>
       {data.map(({ _id, nameProduct, cost }) => (
@@ -45,6 +49,7 @@ const ProductsPage = () => {
             id={_id}
             nameProduct={nameProduct}
             cost={cost}
+            onClick={handleButtonEdit}
           />
         </div>
       ))}

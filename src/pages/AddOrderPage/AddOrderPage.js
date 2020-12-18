@@ -9,12 +9,13 @@ import InformationElement from "../../components/molecules/InformationElement";
 import ElementTable from "../../components/molecules/ElementTable";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect";
-import SelectOrderStatus from "../../components/atoms/Select/SelectOrderStatus";
 
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
 import { selectReducer } from "../../reducers/selectConsumer.reducer";
 import { selectProducts } from "../../reducers/selectProducts.reducer";
 import { selectTracking } from "../../reducers/selectTracking.reducer";
+import Select from "../../components/atoms/Select/Select";
+import OrderFullList from "../../components/organism/OrderFullList/OrderFullList";
 
 const Wrapper = styled.div`
   display: grid;
@@ -82,17 +83,19 @@ const AddOrderPage = () => {
     });
 
   const handleClickButton = () => {
-    console.log(stateTracking);
+    if (stateProducts.length < 1) return;
+    if (stateTracking.length < 1) return;
+    if (state.length < 1) return;
     const data = [
       { ...state },
       [...stateProducts],
       {
         courier: stateTracking.courier,
         trackingNumber: stateTracking.trackingNumber,
-        status: stateTracking.status,
+        status: stateTracking.status || "Zamówienie złożone",
       },
     ];
-
+    console.log(data);
     axios
       .post(
         "http://localhost:5000/api/orders/add",
@@ -114,11 +117,9 @@ const AddOrderPage = () => {
   };
 
   const handleSelectConsumer = (e) => {
-    console.log(e);
     const id = e.value;
     const selectedData = allConsumer.filter(({ _id }) => _id === id);
     dispatch({ type: "SELECT_VALUE", state: selectedData[0] });
-    console.log(state);
   };
 
   const handleSelectProduct = (e) => {
@@ -128,9 +129,11 @@ const AddOrderPage = () => {
   };
 
   const handleButtonAddProduct = () => {
+    if (activeProduct) {
+      dispatchProducts({ type: "SELECT_VALUE", data: activeProduct[0] });
+      setActiveProduct(null);
+    }
     setIsOpen(false);
-    dispatchProducts({ type: "SELECT_VALUE", data: activeProduct[0] });
-    // setActiveProduct({});
   };
 
   return (
@@ -145,17 +148,19 @@ const AddOrderPage = () => {
           />
           {state.length !== 0 && (
             <div>
-              <InformationElement data={state.firstName} title="Imię:" />
-              <InformationElement data={state.lastName} title="Nazwisko:" />
               <InformationElement
-                data={state.companyName}
-                title="Pełna nazwa firmy:"
+                data={state.fullName}
+                title={
+                  state.consumerType === "Firma"
+                    ? "Nazwa firmy"
+                    : "Imię i nazwisko"
+                }
               />
+
               <InformationElement
                 data={`ul. ${state.street} ${state.number}, ${state.code} ${state.city}`}
                 title="Adres:"
               />
-              <InformationElement data={state.NIP} title="NIP:" />
               <InformationElement data={state.phone} title="Numer telefonu:" />
               <InformationElement data={state.email} title="Email:" />
               <ElementTable
@@ -170,11 +175,38 @@ const AddOrderPage = () => {
                 title="Numer przesyłki"
                 name="trackingNumber"
               />
-              <SelectOrderStatus
+
+              <Select
+                value={[
+                  {
+                    selected: true,
+                    title: "Zamówienie złożone",
+                    value: "Zamówienie złożone",
+                  },
+                  {
+                    selected: false,
+                    title: "Zamówienie przyjęte do realizacji",
+                    value: "Zamówienie przyjęte do realizacji",
+                  },
+                  {
+                    selected: false,
+                    title: "Zamówienie wysłane",
+                    value: "Zamówienie wysłane",
+                  },
+                  {
+                    selected: false,
+                    title: "Zamówienie dostarczone",
+                    value: "Zamówienie dostarczone",
+                  },
+                  {
+                    selected: false,
+                    title: "Zamówienie zakończone",
+                    value: "Zamówienie zakończone",
+                  },
+                ]}
                 onChange={handleValue}
-                data={state.status}
-                title="Status"
-                name="status"
+                name="Status zamówienia"
+                type="status"
               />
             </div>
           )}
@@ -193,18 +225,16 @@ const AddOrderPage = () => {
                 options={allProduct}
                 onChange={handleSelectProduct}
               />
-              <ButtonSquare type="edit" onClick={handleButtonAddProduct}>
+              <ButtonSquare type="add" onClick={handleButtonAddProduct}>
                 Dodaj
               </ButtonSquare>
             </div>
           ) : (
-            <ButtonSquare type="edit" onClick={() => setIsOpen(true)}>
+            <ButtonSquare type="add" onClick={() => setIsOpen(true)}>
               Kolejny produkt
             </ButtonSquare>
           )}
-          {stateProducts.map(({ cost, nameProduct }) => (
-            <InformationElement data={cost} title={nameProduct} />
-          ))}
+          <OrderFullList product={stateProducts} />
         </WrapperNotes>
       </Wrapper>
     </AppTemplate>

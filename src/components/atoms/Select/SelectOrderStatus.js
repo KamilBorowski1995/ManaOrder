@@ -3,7 +3,6 @@ import React from "react";
 const SelectOrderStatus = ({ onChange, data }) => {
   return (
     <div>
-      {console.log(data)}
       <label for="role">Status:</label>
 
       <select onChange={onChange} name="status" id="status">

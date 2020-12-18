@@ -9,6 +9,7 @@ import ElementTable from "../../components/molecules/ElementTable";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 
 import { addConsumerReducer } from "../../reducers/addConsumer.reducer";
+import InputRadio from "../../components/atoms/Input/InputRadio";
 
 const Wrapper = styled.div`
   display: grid;
@@ -24,6 +25,16 @@ const WrapperConsumerData = styled.div`
 
 const WrapperNotes = styled.div`
   position: relative;
+`;
+
+const WrapperInputRadio = styled.div`
+  display: grid;
+  grid-template-columns: minmax(auto, 200px) 2fr;
+  align-items: center;
+  margin-bottom: 10px;
+  :nth-last-of-type(1) {
+    margin-bottom: 20px;
+  }
 `;
 
 const AddConsumerPage = () => {
@@ -80,28 +91,21 @@ const AddConsumerPage = () => {
     <AppTemplate>
       <Wrapper>
         <WrapperConsumerData>
-          <div>
-            <label>
-              <input
-                type="radio"
-                checked={selectConsumerType === "Firma"}
-                name="consumerType"
-                value="Firma"
-                onChange={handleRadioInput}
-              />
-              Firma
-            </label>
-            <label>
-              <input
-                type="radio"
-                name="consumerType"
-                value="Osoba fizyczna"
-                checked={selectConsumerType === "Osoba fizyczna"}
-                onChange={handleRadioInput}
-              />
-              Osoba fizyczna
-            </label>
-          </div>
+          <WrapperInputRadio>
+            <InputRadio
+              name="consumerType"
+              value="Firma"
+              selectConsumerType={selectConsumerType}
+              onChange={handleRadioInput}
+            />
+            <InputRadio
+              name="consumerType"
+              value="Osoba fizyczna"
+              selectConsumerType={selectConsumerType}
+              onChange={handleRadioInput}
+            />
+          </WrapperInputRadio>
+
           <ElementTable
             onChange={handleValue}
             data={state.firstName}
@@ -152,6 +156,7 @@ const AddConsumerPage = () => {
         </WrapperConsumerData>
         <WrapperNotes>
           <ElementTable
+            type="textarea"
             onChange={handleValue}
             data={state.notes}
             title="Notatki"

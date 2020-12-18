@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 import axios from "axios";
 
@@ -8,14 +8,26 @@ import auth from "../../AuthComponent/auth";
 import AppTemplate from "../../templates/AppTemplate";
 
 import OrderList from "../../components/molecules/OrderList/OrderList";
-
+import InputRadio from "../../components/atoms/Input/InputRadio";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
 import Auth from "../../AuthComponent/auth";
+
+const WrapperInputRadio = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, minmax(auto, 200px));
+  align-items: center;
+  margin-bottom: 20px;
+  :nth-last-of-type(1) {
+    margin-bottom: 20px;
+  }
+`;
 
 const AppPage = () => {
   const history = useHistory();
 
   const [data, setData] = useState([]);
+  const [displayOrder, setDisplayOrder] = useState([]);
+  const [selectConsumerType, setSelectConsumerType] = useState("Wszystkie");
 
   useEffect(() => {
     axios
@@ -26,6 +38,7 @@ const AppPage = () => {
       })
       .then((res) => {
         setData(res.data);
+        setDisplayOrder(res.data);
       })
       .catch(function (error) {
         Auth.logout(() => history.push("/"));
@@ -39,19 +52,61 @@ const AppPage = () => {
   };
 
   const handleButtonEdit = (e, id) => {
-    // console.log(history.location.pathname);
-    // history.push(`${history.location.pathname}/edit/`);
     history.push(`orders/edit/${id}`);
+  };
+
+  const handleRadioInput = (e) => {
+    setSelectConsumerType(e.target.value);
+    switch (e.target.value) {
+      case "Wszystkie":
+        setDisplayOrder(data);
+        break;
+      case "Aktywne":
+        setDisplayOrder(
+          data.filter(
+            ({ tracking }) => tracking.status !== "Zamówienie zakończone"
+          )
+        );
+        break;
+      case "Zakończone":
+        setDisplayOrder(
+          data.filter(
+            ({ tracking }) => tracking.status === "Zamówienie zakończone"
+          )
+        );
+        break;
+      default:
+        break;
+    }
   };
   return (
     <AppTemplate>
-      {data.map(({ _id, consumer, products, tracking }) => (
+      <WrapperInputRadio>
+        <InputRadio
+          name="orderType"
+          value="Wszystkie"
+          selectConsumerType={selectConsumerType}
+          onChange={handleRadioInput}
+        />
+        <InputRadio
+          name="orderType"
+          value="Aktywne"
+          selectConsumerType={selectConsumerType}
+          onChange={handleRadioInput}
+        />
+        <InputRadio
+          name="orderType"
+          value="Zakończone"
+          selectConsumerType={selectConsumerType}
+          onChange={handleRadioInput}
+        />
+      </WrapperInputRadio>
+      {displayOrder.map(({ _id, consumer, products, tracking }) => (
         <div key={_id}>
           <OrderList
             type="order"
             id={_id}
-            firstName={consumer.firstName}
-            lastName={consumer.lastName}
+            fullName={consumer.fullName}
             street={consumer.street}
             code={consumer.code}
             number={consumer.number}

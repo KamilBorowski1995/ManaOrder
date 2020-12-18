@@ -8,13 +8,12 @@ import AppTemplate from "../../templates/AppTemplate";
 import InformationElement from "../../components/molecules/InformationElement";
 import ElementTable from "../../components/molecules/ElementTable";
 import ButtonSquare from "../../components/atoms/ButtonSquare/ButtonSquare";
-import CustomSelect from "../../components/atoms/CustomSelect/CustomSelect";
 
 import Paragraph from "../../components/atoms/Paragraph/Paragraph";
-import { selectReducer } from "../../reducers/selectConsumer.reducer";
-import { selectProducts } from "../../reducers/selectProducts.reducer";
 import { selectTracking } from "../../reducers/selectTracking.reducer";
-import SelectOrderStatus from "../../components/atoms/Select/SelectOrderStatus";
+import Select from "../../components/atoms/Select/Select";
+import Auth from "../../AuthComponent/auth";
+import OrderFullList from "../../components/organism/OrderFullList/OrderFullList";
 
 const Wrapper = styled.div`
   display: grid;
@@ -37,13 +36,11 @@ const EditOrderPage = () => {
   const params = useParams();
 
   const [stateProducts, setStateProducts] = useState([]);
-  const [tracking, setTrackign] = useState([]);
-  const [consumerData, setConsumerData] = useState([]);
 
+  const [consumerData, setConsumerData] = useState([]);
   const [stateTracking, dispatchTracking] = useReducer(selectTracking, {});
 
   useEffect(() => {
-    console.log(params.id);
     axios
       .get("http://localhost:5000/api/orders/order", {
         headers: {
@@ -65,11 +62,11 @@ const EditOrderPage = () => {
         setStateProducts(res.data[0].products);
       })
       .catch(function (error) {
-        // Auth.logout(() => history.push("/"));
+        Auth.logout(() => history.push("/"));
         console.log(error);
       })
       .then(function () {});
-  }, []);
+  }, [history, params.id]);
 
   const handleValue = (e) =>
     dispatchTracking({
@@ -78,25 +75,75 @@ const EditOrderPage = () => {
       value: e.target.value,
     });
 
+  const handleClickButton = () => {
+    const tracking = {
+      courier: stateTracking.courier,
+      trackingNumber: stateTracking.trackingNumber,
+      status: stateTracking.status || "Zamówienie złożone",
+    };
+
+    axios
+      .put(
+        `http://localhost:5000/api/orders/${params.id}`,
+        {
+          tracking,
+        },
+        {
+          headers: {
+            "auth-token": sessionStorage.getItem("auth-token"),
+          },
+        }
+      )
+      .then(function (response) {
+        history.push("/");
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
+  const value = [
+    {
+      title: "Zamówienie złożone",
+      value: "Zamówienie złożone",
+    },
+    {
+      title: "Zamówienie przyjęte do realizacji",
+      value: "Zamówienie przyjęte do realizacji",
+    },
+    {
+      title: "Zamówienie wysłane",
+      value: "Zamówienie wysłane",
+    },
+    {
+      title: "Zamówienie dostarczone",
+      value: "Zamówienie dostarczone",
+    },
+    {
+      title: "Zamówienie zakończone",
+      value: "Zamówienie zakończone",
+    },
+  ];
+
   return (
     <AppTemplate>
       <Wrapper>
         <WrapperConsumerData>
+          <Paragraph>Dane klienta:</Paragraph>
           <div>
-            <InformationElement data={consumerData.firstName} title="Imię:" />
             <InformationElement
-              data={consumerData.lastName}
-              title="Nazwisko:"
+              data={consumerData.fullName}
+              title={
+                consumerData.consumerType === "firma"
+                  ? "Nazwa firmy"
+                  : "Imię i nazwisko"
+              }
             />
-            <InformationElement
-              data={consumerData.companyName}
-              title="Pełna nazwa firmy:"
-            />
+
             <InformationElement
               data={`ul. ${consumerData.street} ${consumerData.number}, ${consumerData.code} ${consumerData.city}`}
               title="Adres:"
             />
-            <InformationElement data={consumerData.NIP} title="NIP:" />
             <InformationElement
               data={consumerData.phone}
               title="Numer telefonu:"
@@ -114,23 +161,24 @@ const EditOrderPage = () => {
               title="Numer przesyłki"
               name="trackingNumber"
             />
-            <SelectOrderStatus
+
+            <Select
+              value={value.map(({ title, value }) => ({
+                title: title,
+                value: value,
+                selected: value === stateTracking.status ? true : false,
+              }))}
               onChange={handleValue}
-              data={stateTracking.status}
-              title="Status"
-              name="status"
+              name="Status zamówienia"
+              type="status"
             />
           </div>
 
-          {/* <ButtonSquare onClick={handleClickButton}>
-            Dodaj nowe zamówienie
-          </ButtonSquare> */}
+          <ButtonSquare onClick={handleClickButton}>Zapisz zmiany</ButtonSquare>
         </WrapperConsumerData>
         <WrapperNotes>
-          <Paragraph>Zamówienie</Paragraph>
-          {stateProducts.map(({ cost, nameProduct }) => (
-            <InformationElement data={cost} title={nameProduct} />
-          ))}
+          <Paragraph>Podgląd zamówienia:</Paragraph>
+          <OrderFullList product={stateProducts} />
         </WrapperNotes>
       </Wrapper>
     </AppTemplate>

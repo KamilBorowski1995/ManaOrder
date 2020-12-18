@@ -6,19 +6,9 @@ const CustomSelect = ({ options, title, onChange, name }) => {
     switch (name) {
       case "consumer":
         return options.map(
-          ({
-            _id,
-            firstName,
-            lastName,
-            phone,
-            email,
-            street,
-            code,
-            number,
-            city,
-          }) => ({
+          ({ _id, fullName, phone, email, street, code, number, city }) => ({
             value: _id,
-            label: `${firstName} ${lastName} ul.${street} ${number}, ${code} ${city}, tel: ${phone} email: ${email}`,
+            label: `${fullName} ul.${street} ${number}, ${code} ${city}, tel: ${phone} email: ${email}`,
           })
         );
 

@@ -9,7 +9,7 @@ import NavBar from "../components/organism/NavBar";
 import NavCategory from "../components/organism/NavCategory";
 
 const Wrapper = styled.div`
-  /* max-width: 1366px; */
+  max-width: 1920px;
   margin: 0 auto;
   display: grid;
   padding: 20px 30px;

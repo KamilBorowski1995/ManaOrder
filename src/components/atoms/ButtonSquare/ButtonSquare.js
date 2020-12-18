@@ -5,7 +5,10 @@ import { theme } from "../../../theme/mainTheme";
 const StyledButton = styled.button`
   position: ${({ type }) => (type === "edit" ? "absolute" : "fixed")};
   right: ${({ type }) => (type === "edit" ? "0" : "30px")};
-  bottom: ${({ type }) => (type === "edit" ? "50%" : "30px")};
+  /* bottom: ${({ type }) => (type === "edit" ? "50%" : "30px")}; */
+  bottom: ${({ type }) =>
+    (type === "add" && "80px") || (type === "edit" && "50%") || "30px"};
+
   transform: ${({ type }) => (type === "edit" ? "translateY(50%)" : "30px")};
   color: ${({ type }) =>
     type === "edit" ? `${theme.colors.primary}` : `${theme.colors.tertiary}`};
@@ -25,6 +28,7 @@ const StyledButton = styled.button`
   :hover {
     opacity: 0.9;
   }
+  
 `;
 
 const ButtonSquare = ({ children, onClick, className, type }) => {

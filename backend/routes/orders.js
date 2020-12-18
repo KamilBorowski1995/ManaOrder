@@ -2,6 +2,7 @@ const router = require("express").Router();
 
 const Order = require("../model/order.schema");
 const verify = require("../function/verifyToken");
+const { findOne } = require("../model/order.schema");
 
 router.post("/add", verify, async (req, res) => {
   const newOrderConsumer = req.body.data[0];
@@ -29,6 +30,18 @@ router.get("/", verify, async (req, res) => {
 router.get("/order", verify, async (req, res) => {
   const findOrder = await Order.find({ _id: req.query.orderId });
   res.send(findOrder);
+});
+
+router.put("/:id", verify, async (req, res) => {
+  console.log(req.params.id);
+  console.log(req.body.tracking);
+  const editOrder = await Order.updateOne(
+    { _id: req.params.id },
+    {
+      $set: { tracking: req.body.tracking },
+    }
+  );
+  res.send(editOrder);
 });
 
 module.exports = router;

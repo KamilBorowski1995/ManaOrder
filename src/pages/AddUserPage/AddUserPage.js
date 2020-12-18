@@ -35,23 +35,25 @@ const AddUserPage = () => {
     });
 
   const handleClickButton = () => {
-    console.log(state);
-
     const newUsers = {
-      firstName: state.firstName,
-      lastName: state.lastName,
+      fullName: state.fullName,
       password: state.password,
       login: state.login,
       role: state.role,
     };
 
     axios
-      .post("http://localhost:5000/api/users/add", {
-        newUsers,
-        headers: {
-          "auth-token": sessionStorage.getItem("auth-token"),
+      .post(
+        "http://localhost:5000/api/users/add",
+        {
+          newUsers,
         },
-      })
+        {
+          headers: {
+            "auth-token": sessionStorage.getItem("auth-token"),
+          },
+        }
+      )
       .then(function (response) {
         history.push("/users");
       })
@@ -65,16 +67,9 @@ const AddUserPage = () => {
         <WrapperConsumerData>
           <ElementTable
             onChange={handleValue}
-            data={state.firstName}
-            title="Imię"
-            name="firstName"
-          />
-
-          <ElementTable
-            onChange={handleValue}
-            data={state.lastName}
-            title="Nazwisko"
-            name="lastName"
+            data={state.fullName}
+            title="Imię i nazwisko"
+            name="fullName"
           />
           <ElementTable
             onChange={handleValue}
@@ -91,10 +86,13 @@ const AddUserPage = () => {
           />
 
           <Select
+            value={[
+              { selected: false, title: "Administrator", value: "admin" },
+              { selected: true, title: "Użytkownik", value: "user" },
+            ]}
             onChange={handleValue}
-            data={state.role}
-            title="Rola"
-            name="role"
+            name="Rola"
+            type="role"
           />
           <ButtonSquare onClick={handleClickButton}>
             Dodaj nowego użytkownika

@@ -37,11 +37,21 @@ const UsersPage = () => {
     history.push("/users/add");
   };
 
+  const handleButtonEdit = () => {
+    console.log(history.location);
+  };
+
   return (
     <AppTemplate>
       {data.map(({ _id, fullName, role }) => (
         <div key={_id}>
-          <OrderList type="user" id={_id} fullName={fullName} role={role} />
+          <OrderList
+            type="user"
+            id={_id}
+            fullName={fullName}
+            role={role}
+            onClick={handleButtonEdit}
+          />
         </div>
       ))}
       {userRole === "admin" && (
