@@ -3,6 +3,7 @@ import { useHistory, useParams } from "react-router-dom";
 import styled from "styled-components";
 import axios from "axios";
 
+import { theme } from "../../theme/mainTheme";
 import AppTemplate from "../../templates/AppTemplate";
 
 import InformationElement from "../../components/molecules/InformationElement";
@@ -19,8 +20,12 @@ import { config } from "../../config";
 
 const Wrapper = styled.div`
   display: grid;
-
   grid-template-columns: 1fr 1fr;
+
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    padding-bottom: 40px;
+  }
 `;
 
 const WrapperConsumerData = styled.div`
@@ -31,6 +36,13 @@ const WrapperConsumerData = styled.div`
 
 const WrapperNotes = styled.div`
   position: relative;
+`;
+
+const StyledParagraphHeader = styled(Paragraph)`
+  @media (max-width: 680px) {
+    font-size: ${theme.fontSize.m};
+    font-weight: bold;
+  }
 `;
 
 const EditOrderPage = () => {
@@ -131,7 +143,7 @@ const EditOrderPage = () => {
     <AppTemplate>
       <Wrapper>
         <WrapperConsumerData>
-          <Paragraph>Dane klienta:</Paragraph>
+          <StyledParagraphHeader>Dane klienta:</StyledParagraphHeader>
           <div>
             <InformationElement
               data={consumerData.fullName}
@@ -179,7 +191,8 @@ const EditOrderPage = () => {
           <ButtonSquare onClick={handleClickButton}>Zapisz zmiany</ButtonSquare>
         </WrapperConsumerData>
         <WrapperNotes>
-          <Paragraph>Podgląd zamówienia:</Paragraph>
+          <StyledParagraphHeader>Zamówienie:</StyledParagraphHeader>
+
           <OrderFullList product={stateProducts} />
         </WrapperNotes>
       </Wrapper>

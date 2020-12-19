@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { config } from "../../../config";
 
 import { theme } from "../../../theme/mainTheme";
 
@@ -13,9 +14,19 @@ const Wrapper = styled.div`
   :nth-last-of-type(1) {
     margin-bottom: 20px;
   }
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    margin-bottom: 30px;
+  }
 `;
 
-const StyledParagraph = styled(Paragraph)``;
+const StyledParagraphHeader = styled(Paragraph)`
+  @media (max-width: 680px) {
+    font-size: ${theme.fontSize.s};
+    font-weight: bold;
+    font-style: italic;
+  }
+`;
 
 const Input = styled.input`
   background-color: transparent;
@@ -58,14 +69,16 @@ const ElementTable = ({
   onChange,
   name,
   type = "input",
+  typeInput = "text",
 }) => {
   const inputPlaceholder = !data && "Edytuj";
 
   return (
     <Wrapper>
-      <StyledParagraph>{title}:</StyledParagraph>
+      <StyledParagraphHeader>{title}:</StyledParagraphHeader>
       {type === "input" && (
         <Input
+          type={typeInput}
           name={name}
           value={data}
           onChange={onChange}

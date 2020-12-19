@@ -11,6 +11,11 @@ const StyledParagraph = styled.p`
   display: inline-block;
 
   ${({ size }) =>
+    size === "m" &&
+    `
+      font-size: ${theme.fontSize.m}
+    `}
+  ${({ size }) =>
     size === "l" &&
     `
       font-size: ${theme.fontSize.l}

@@ -11,6 +11,9 @@ const Wrapper = styled.div`
   :nth-last-of-type(1) {
     margin-bottom: 20px;
   }
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+  }
 `;
 
 const StyledLabel = styled.label`
@@ -19,6 +22,11 @@ const StyledLabel = styled.label`
   color: ${theme.colors.primary};
   transition: 0.3s ease-in-out;
   display: inline-block;
+  @media (max-width: 680px) {
+    font-size: ${theme.fontSize.s};
+    font-weight: bold;
+    font-style: italic;
+  }
 `;
 
 const StyledSelect = styled.select`
@@ -45,6 +53,20 @@ const StyledOption = styled.option`
   font-family: ${theme.primaryFont};
   cursor: pointer;
 `;
+
+// const StyledParagraphHeader = styled(Paragraph)`
+//   @media (max-width: 680px) {
+//     font-size: ${theme.fontSize.s};
+//     font-weight: bold;
+//     font-style: italic;
+//   }
+// `;
+
+// const StyledParagraph = styled(Paragraph)`
+//   @media (max-width: 680px) {
+//     font-size: ${theme.fontSize.s};
+//   }
+// `;
 
 // const Select = ({ onChange }) => {
 //   return (

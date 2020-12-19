@@ -23,6 +23,10 @@ const Wrapper = styled.div`
   display: grid;
 
   grid-template-columns: 1fr 1fr;
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    padding-bottom: 40px;
+  }
 `;
 
 const WrapperConsumerData = styled.div`
@@ -34,6 +38,8 @@ const WrapperConsumerData = styled.div`
 const WrapperNotes = styled.div`
   position: relative;
 `;
+
+const StyledButtonSquare = styled(ButtonSquare)``;
 
 const AddOrderPage = () => {
   const history = useHistory();
@@ -227,14 +233,16 @@ const AddOrderPage = () => {
                 options={allProduct}
                 onChange={handleSelectProduct}
               />
-              <ButtonSquare type="add" onClick={handleButtonAddProduct}>
+              <StyledButtonSquare type="add" onClick={handleButtonAddProduct}>
                 Dodaj
-              </ButtonSquare>
+              </StyledButtonSquare>
             </div>
           ) : (
-            <ButtonSquare type="add" onClick={() => setIsOpen(true)}>
-              Kolejny produkt
-            </ButtonSquare>
+            <div>
+              <StyledButtonSquare type="add" onClick={() => setIsOpen(true)}>
+                Kolejny produkt
+              </StyledButtonSquare>
+            </div>
           )}
           <OrderFullList product={stateProducts} />
         </WrapperNotes>

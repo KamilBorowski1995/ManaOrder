@@ -76,6 +76,7 @@ const AddProductPage = () => {
             data={state.title}
             title="Cena produktu"
             name="cost"
+            typeInput="number"
           />
 
           <ButtonSquare onClick={handleClickButton}>

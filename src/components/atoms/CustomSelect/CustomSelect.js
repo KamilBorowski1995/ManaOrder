@@ -1,5 +1,26 @@
 import React from "react";
 import Select from "react-select";
+import styled from "styled-components";
+import Auth from "../../../AuthComponent/auth";
+
+import { theme } from "../../../theme/mainTheme";
+
+const StyledSelect = styled(Select)`
+  font-size: ${theme.fontSize.m};
+  @media (max-width: 680px) {
+    font-size: ${theme.fontSize.xs};
+  }
+`;
+
+const customStyles = {
+  menu: (provided, state) => ({
+    ...provided,
+    width: "100%",
+    maxHeight: "150px",
+    overflow: "auto",
+    zIndex: "99",
+  }),
+};
 
 const CustomSelect = ({ options, title, onChange, name }) => {
   const setMap = (name) => {
@@ -26,7 +47,8 @@ const CustomSelect = ({ options, title, onChange, name }) => {
   return (
     <div>
       <h3>{title}</h3>
-      <Select
+      <StyledSelect
+        styles={customStyles}
         placeholder="Wyszukaj..."
         noOptionsMessage={() => "Brak szukanej zawartości"}
         onChange={onChange}

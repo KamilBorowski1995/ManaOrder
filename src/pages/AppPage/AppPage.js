@@ -24,6 +24,16 @@ const WrapperInputRadio = styled.div`
   }
 `;
 
+const WrapperList = styled.div`
+  padding-bottom: 20px;
+  max-height: calc(100vh - 250px);
+  overflow: auto;
+  ::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+`;
+
 const AppPage = () => {
   const history = useHistory();
 
@@ -103,23 +113,25 @@ const AppPage = () => {
           onChange={handleRadioInput}
         />
       </WrapperInputRadio>
-      {displayOrder.map(({ _id, consumer, products, tracking }) => (
-        <div key={_id}>
-          <OrderList
-            type="order"
-            id={_id}
-            fullName={consumer.fullName}
-            street={consumer.street}
-            code={consumer.code}
-            number={consumer.number}
-            city={consumer.city}
-            phone={consumer.phone}
-            email={consumer.email}
-            status={tracking.status}
-            onClick={handleButtonEdit}
-          />
-        </div>
-      ))}
+      <WrapperList>
+        {displayOrder.map(({ _id, consumer, products, tracking }) => (
+          <div key={_id}>
+            <OrderList
+              type="order"
+              id={_id}
+              fullName={consumer.fullName}
+              street={consumer.street}
+              code={consumer.code}
+              number={consumer.number}
+              city={consumer.city}
+              phone={consumer.phone}
+              email={consumer.email}
+              status={tracking.status}
+              onClick={handleButtonEdit}
+            />
+          </div>
+        ))}
+      </WrapperList>
       <ButtonSquare onClick={handleButtonToAddOrder}>
         Dodaj nowe zamówienie
       </ButtonSquare>

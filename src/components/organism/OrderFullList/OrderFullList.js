@@ -1,4 +1,5 @@
-import React from "react";
+import { number } from "joi";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 
 import InformationElementBasket from "../../molecules/InformationElement/InformationElementBasket";
@@ -26,14 +27,26 @@ const Wrapper = styled.div`
 `;
 
 const OrderFullList = ({ product }) => {
+  const [wallet, setWallet] = useState(0);
+
   const mapProduct = product.map(({ cost, nameProduct }) => (
     <InformationElementBasket data={cost} title={nameProduct} />
   ));
+  useEffect(() => {
+    if (product.length > 0) {
+      setWallet(0);
+      product.forEach(({ cost }) => {
+        const editCost = cost.replace(",", ".");
+        setWallet((prevValue) => prevValue + editCost * 1);
+      });
+    }
+  }, [product]);
 
   return (
     <Wrapper>
-      {/* <p>Lista zakupów</p> */}
       {mapProduct}
+      <hr />
+      <InformationElementBasket data={`${wallet}`} title="Suma:" />
     </Wrapper>
   );
 };

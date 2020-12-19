@@ -8,6 +8,7 @@ import Auth from "../AuthComponent/auth";
 import NavBar from "../components/organism/NavBar";
 import NavCategory from "../components/organism/NavCategory";
 
+import { theme } from "../theme/mainTheme";
 import { config } from "../config";
 
 const Wrapper = styled.div`
@@ -15,18 +16,31 @@ const Wrapper = styled.div`
   margin: 0 auto;
   display: grid;
   padding: 20px 30px;
+
+  @media (max-width: 680px) {
+    /* padding: 10px 5px; */
+    padding: 0;
+  }
 `;
 
 const ContentWrapper = styled.div`
   display: grid;
   grid-template-columns: 230px auto;
+
   @media (max-width: 1040px) {
     display: flex;
     flex-direction: column;
   }
+  /* @media (max-width: 680px) {
+    display: flex;
+    flex-direction: column-reverse;
+  } */
 `;
 
-const StyledNavCategory = styled.div``;
+const StyledNavCategory = styled.div`
+  margin: 20px 0;
+  /* padding: 0 0 20px; */
+`;
 
 const StyledWrapperChildren = styled.div`
   padding: 0px 30px;

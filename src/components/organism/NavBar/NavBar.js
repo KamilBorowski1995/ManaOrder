@@ -15,7 +15,7 @@ const NavBarWrapper = styled.div`
   grid-template-columns: max-content 4fr max-content;
   margin-bottom: 20px;
   align-items: center;
-  @media (max-width: 1150px) {
+  @media (max-width: 680px) {
     display: flex;
     flex-direction: column;
   }
@@ -28,18 +28,23 @@ const NavWrapper = styled.nav`
 const StyledUserName = styled.div`
   padding-left: 80px;
   padding-right: 20px;
+  @media (max-width: 680px) {
+    padding-left: 20px;
+    text-align: center;
+    padding-top: 10px;
+  }
 `;
 
 const StyledLogo = styled(Link)`
   display: flex;
   align-items: center;
-  @media (max-width: 1150px) {
-    margin-top: 20px;
+  @media (max-width: 680px) {
+    /* margin-top: 20px; */
   }
 `;
 
 const StyledButton = styled(Button)`
-  @media (max-width: 1150px) {
+  @media (max-width: 680px) {
     display: none;
   }
 `;
@@ -77,7 +82,7 @@ const NavBar = () => {
 
       <StyledUserName>
         {userName !== "" && userName !== null && (
-          <Paragraph>Zalogowany użytkownik: {userName}</Paragraph>
+          <Paragraph size="m">Zalogowany użytkownik: {userName}</Paragraph>
         )}
       </StyledUserName>
       <NavWrapper>

@@ -34,7 +34,9 @@ const StyledHeader = styled(Header)`
 
 const ButtonWrapper = styled.div`
   margin-top: 45px;
-  text-align: center;
+  @media (max-width: 1150px) {
+    text-align: center;
+  }
 `;
 
 const HomePage = () => {

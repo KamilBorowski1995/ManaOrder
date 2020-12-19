@@ -28,6 +28,14 @@ const StyledButton = styled.button`
   :hover {
     opacity: 0.9;
   }
+  @media (max-width: 680px) {
+  bottom: ${({ type }) =>
+    (type === "add" && "80px") || (type === "edit" && "50%") || "0"};
+  width: ${({ type }) => type !== "edit" && type !== "add" && "100vw"};
+  right: 0;
+  position: ${({ type }) => (type === "edit" ? "absolute" : "fixed")};
+z-index: 1;
+  }
   
 `;
 

@@ -12,6 +12,11 @@ const Wrapper = styled.div`
   position: relative;
   padding: 0 30px;
   min-width: 350px;
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(auto-fit, 250px);
+    min-width: 150px;
+    padding: 0 5px;
+  }
 `;
 
 const StyledText = styled.p`
@@ -23,6 +28,18 @@ const StyledText = styled.p`
     margin-right: 100px;
   }
   overflow: hidden;
+  @media (max-width: 680px) {
+    grid-template-columns: repeat(auto-fit, 250px);
+    min-width: 150px;
+    padding: 5px 0 5px;
+    font-size: ${theme.fontSize.s};
+  }
+`;
+
+const StyledButtonSquare = styled(ButtonSquare)`
+  @media (max-width: 680px) {
+    font-size: ${theme.fontSize.xs};
+  }
 `;
 
 const OrderList = ({
@@ -94,9 +111,9 @@ const OrderList = ({
         </StyledText>
       )}
       {(userRole === "admin" || type === "order") && (
-        <ButtonSquare type="edit" onClick={(e) => onClick(e, id)}>
+        <StyledButtonSquare type="edit" onClick={(e) => onClick(e, id)}>
           Edytuj
-        </ButtonSquare>
+        </StyledButtonSquare>
       )}
     </Wrapper>
   );

@@ -38,7 +38,7 @@ const StyledImage = styled.img`
   }
   @media (max-width: 1150px) {
     width: ${({ page }) => (page === "login" ? "300px" : "300px")};
-    /* display: none; */
+    margin: 0 auto 50px;
   }
   @media (max-width: 950px) {
     width: ${({ page }) => (page === "login" ? "150px" : "240px")};

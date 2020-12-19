@@ -17,6 +17,10 @@ const Wrapper = styled.div`
   display: grid;
 
   grid-template-columns: 1fr 1fr;
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr;
+    padding-bottom: 40px;
+  }
 `;
 
 const WrapperConsumerData = styled.div`
@@ -36,6 +40,10 @@ const WrapperInputRadio = styled.div`
   margin-bottom: 10px;
   :nth-last-of-type(1) {
     margin-bottom: 20px;
+  }
+  @media (max-width: 680px) {
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 40px;
   }
 `;
 
